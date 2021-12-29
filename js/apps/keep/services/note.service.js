@@ -3,7 +3,8 @@ import { utilService } from "../../../services/util.service.js";
 
 export const noteService = {
     query,
-    removeNote
+    removeNote,
+    saveNote
 }
 
 const KEY = 'noteDB';
@@ -19,6 +20,31 @@ function removeNote(noteId) {
     notes = notes.filter(note => note.id !== noteId);
     _saveNotesToStorage(notes);
     return Promise.resolve();
+}
+
+function saveNote(noteToSave) {
+    return noteToSave.id ? _updateNote(noteToSave) : _addNote(noteToSave);
+}
+
+function _addNote(noteToSave) {
+    let notes = _loadNotesFromStorage();
+    var note = _createNote(noteToSave);
+    notes = [note, ...notes];
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
+
+function _createNote(noteToSave) {
+    return {
+        id: utilService.makeId,
+        type: "note-txt",
+        isPinned: false,
+        info: noteToSave
+    }
+}
+
+function _updateNote(noteToSave) {
+    return;
 }
 
 function _saveNotesToStorage(notes) {
@@ -39,7 +65,7 @@ function _getNotes() {
         {
             id: utilService.makeId,
             type: "note-txt",
-            isPinned: true,
+            isPinned: false,
             info: {
                 txt: "Fullstack Me Baby!"
             }
@@ -47,7 +73,7 @@ function _getNotes() {
         {
             id: utilService.makeId,
             type: "note-txt",
-            isPinned: true,
+            isPinned: false,
             info: {
                 txt: "another note attempt"
             }
@@ -55,7 +81,7 @@ function _getNotes() {
         {
             id: utilService.makeId,
             type: "note-txt",
-            isPinned: true,
+            isPinned: false,
             info: {
                 txt: "Note test test test tes"
             }
