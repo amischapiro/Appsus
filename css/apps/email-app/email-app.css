@@ -1,0 +1,15 @@
+.email-app{
+    display: flex;
+}
+
+.email-ctgs{
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.email-ctgs button{
+    margin-top: 40px;
+    height: 30px;
+}
+

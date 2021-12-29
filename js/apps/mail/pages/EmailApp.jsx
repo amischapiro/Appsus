@@ -7,7 +7,7 @@ import { EmailCtgs } from "../cmps/EmailCtgs.jsx"
 export class EmailApp extends React.Component{
     state={
         emails:[],
-        filterBy:null
+        filterBy:null,
     }
     componentDidMount() {
         this.loadEmails()
@@ -19,6 +19,7 @@ export class EmailApp extends React.Component{
             this.setState({ emails })
         })
     }
+
 
     onSetFilter = (filterBy) => {
         this.setState({ filterBy }, this.loadEmails)

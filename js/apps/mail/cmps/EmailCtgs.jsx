@@ -9,8 +9,7 @@ export class EmailCtgs extends React.Component{
     state={
         isComposeShown:false,
         filterBy:{
-            inbox:'',
-            sent:''
+            ctg: 'inbox'
 
         }
 
@@ -19,6 +18,15 @@ export class EmailCtgs extends React.Component{
     onToggleComposeModal = () => {
         this.setState((prevState) => ({ ...prevState, isComposeShown: !this.state.isComposeShown }));
       };
+
+    onChangeCtg(newCtg){
+        
+        this.setState((prevState) =>({filterBy:{...prevState.filterBy,ctg:newCtg}}),()=>{
+            this.props.onSetFilter(this.state.filterBy)
+        })
+        
+
+    }
 
     render(){
         const {isComposeShown} = this.state
@@ -29,8 +37,8 @@ export class EmailCtgs extends React.Component{
             {isComposeShown && (
                 <ComposeEmail onToggleComposeModal={this.onToggleComposeModal}/>
             )}
-            <h1>Inbox</h1>
-            <h1>Sent Mail</h1>
+            <button onClick={()=>this.onChangeCtg('inbox')}>Inbox</button>
+            <button onClick={()=>this.onChangeCtg('sent')} >Sent</button>
         </section>
     }
 }
