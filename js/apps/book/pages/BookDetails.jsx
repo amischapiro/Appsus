@@ -2,6 +2,7 @@ import { bookService } from "../services/book.service.js"
 import { RateBook } from "../cmps/RateBook.jsx"
 import { ReviewList } from "../cmps/ReviewList.jsx"
 import { eventBusService } from "../../../services/event-bus.service.js"
+import { Loader } from "../../../cmps/Loader.jsx"
 
 export class BookDetails extends React.Component {
     // function
@@ -48,7 +49,7 @@ export class BookDetails extends React.Component {
 
     render() {
         const {book,isShowReviewModal} = this.state
-        if(!book) return <div>Loading</div>
+        if(!book) return <Loader/>
         const {review} = this.state.book
         
         return (

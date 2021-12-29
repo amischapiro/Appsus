@@ -25,6 +25,12 @@ class _AppHeader extends React.Component {
 						<NavLink
 							className="clean-link"
 							activeClassName="my-active"
+							to="/book">
+							Books
+						</NavLink>
+						<NavLink
+							className="clean-link"
+							activeClassName="my-active"
 							to="/about">
 							About
 						</NavLink>
