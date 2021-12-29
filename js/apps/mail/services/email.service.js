@@ -30,6 +30,8 @@ const gDefaultEmails = [
 export const emailService ={
     query,
     getEmailById,
+    removeEmail,
+    sendEmail
 
 }
 
@@ -79,3 +81,22 @@ function _createEmails(){
     _saveEmailsToStorage(emails)
 }
 
+function removeEmail(emailId){
+    let emails = _loadEmailsFromStorage()
+    emails = emails.filter(email=>email.id !==emailId)
+    _saveEmailsToStorage(emails)
+    return Promise.resolve()
+}
+
+function sendEmail(email){
+    console.log('email:', email);
+    
+    const emails = _loadEmailsFromStorage()
+    email.id = utilService.makeId()
+    email.isRead = true
+    email.sentAt = Date.now()
+    emails.unshift(email)
+    _saveEmailsToStorage(emails)
+    return Promise.resolve()
+
+}

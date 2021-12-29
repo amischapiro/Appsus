@@ -6,6 +6,7 @@ import { BookApp } from './js/apps/book/pages/BookApp.jsx'
 import { BookDetails } from './js/apps/book/pages/BookDetails.jsx'
 import { Booksearch } from './js/apps/book/pages/BookSearch.jsx'
 import { AppHeader } from './js/cmps/AppHeader.jsx';
+import { EmailDetails } from "./js/apps/mail/cmps/EmailDetails.jsx"
 
 const Router = ReactRouterDOM.HashRouter;
 const { Route, Switch } = ReactRouterDOM;
@@ -22,6 +23,7 @@ export function App() {
                         <Route component={BookApp} path="/book" />
                         <Route component={AppAbout} path="/about" />
                         <Route component={KeepApp} path="/keep" />
+                        <Route component={EmailDetails} path="/email/:emailId" />
                         <Route component={EmailApp} path="/email" />
                         <Route component={AppHome} path="/" />
                     </Switch>

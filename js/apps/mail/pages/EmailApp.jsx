@@ -2,6 +2,7 @@ import { EmailList } from "../cmps/EmailList.jsx"
 import { emailService } from "../services/email.service.js"
 import { Loader } from "../../../cmps/Loader.jsx"
 import { EmailFilter } from "../cmps/EmailFilter.jsx"
+import { EmailCtgs } from "../cmps/EmailCtgs.jsx"
 
 export class EmailApp extends React.Component{
     state={
@@ -30,9 +31,9 @@ export class EmailApp extends React.Component{
         if(!emails.length) return <Loader/>
         return (
             <section className="email-app">
-                <h1>Email</h1>
-                <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} />
-                <EmailList emails={emails}/>
+                <div><EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} /></div>
+                <div><EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} />
+                <EmailList emails={emails}/></div>
             </section>
 
 
