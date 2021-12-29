@@ -5,8 +5,8 @@ const { link } = ReactRouterDOM;
 export class KeepApp extends React.Component {
 	state = {
 		notes: null,
-		filterBy: null,
 	};
+
 
 	render() {
 		const { notes } = this.state;
@@ -14,6 +14,7 @@ export class KeepApp extends React.Component {
 		return (
 			<section>
 				<h1>KeepApp</h1>
+				<NoteList notes={notes} />
 			</section>
 		);
 	}

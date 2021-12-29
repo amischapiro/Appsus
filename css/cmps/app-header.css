@@ -1,4 +1,6 @@
 .app-header {
+    display: flex;
+    justify-content: center;
     border-bottom: 1px solid #dbdbdb;
     padding: 0 1.5rem 0.925rem;
 }

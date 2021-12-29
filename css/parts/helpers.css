@@ -24,3 +24,7 @@
 	text-decoration: none;
 	color: inherit;
 }
+
+.main-layout {
+    max-width: 1060px;
+}
