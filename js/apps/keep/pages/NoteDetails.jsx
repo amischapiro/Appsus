@@ -25,7 +25,7 @@ export class NoteDetails extends React.Component {
 		this.props.history.push('/keep');
 	};
 
-	onRemoveCar = () => {
+	onDeleteNote = () => {
 		const { id } = this.state.note;
 		noteService.removeNote(id).then(() => {
 			eventBusService.emit('user-msg', {
@@ -43,23 +43,14 @@ export class NoteDetails extends React.Component {
 			<section className="note-details">
 				<Link
 					className="primary-btn clean-link"
-					to={`/car/edit/${car.id}`}>
-					Edit car
+					to={`/car/edit/${note.id}`}>
+					Edit Note
 				</Link>
-				<h2>Vendor: {car.vendor}</h2>
-				<h2>Speed: {car.speed}</h2>
-				<p>{car.desc}</p>
-				<button className="primary-btn" onClick={this.onGoBack}>
-					Go back
+				<h2>Type: {note.type}</h2>
+				<p>{note.info.txt}</p>
+				<button className="primary-btn" onClick={this.onDeleteNote}>
+					Delete note
 				</button>
-				<button className="primary-btn" onClick={this.onRemoveCar}>
-					Remove car
-				</button>
-				<Link
-					className="primary-btn clean-link"
-					to={`/car/${carService.getNextCarId(car.id)}`}>
-					Next car
-				</Link>
 			</section>
 		);
 	}

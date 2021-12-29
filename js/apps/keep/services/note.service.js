@@ -2,7 +2,8 @@ import { storageService } from "../../../services/storage.service.js";
 import { utilService } from "../../../services/util.service.js";
 
 export const noteService = {
-    query
+    query,
+    removeNote
 }
 
 const KEY = 'noteDB';
@@ -11,6 +12,13 @@ _createNotes();
 function query() {
     const notes = _loadNotesFromStorage();
     return Promise.resolve(notes);
+}
+
+function removeNote(noteId) {
+    let notes = _loadNotesFromStorage();
+    notes = notes.filter(note => note.id !== noteId);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
 }
 
 function _saveNotesToStorage(notes) {
@@ -41,7 +49,7 @@ function _getNotes() {
             type: "note-txt",
             isPinned: true,
             info: {
-                txt: "Fullstack Me Baby!"
+                txt: "another note attempt"
             }
         },
         {
@@ -49,7 +57,7 @@ function _getNotes() {
             type: "note-txt",
             isPinned: true,
             info: {
-                txt: "Fullstack Me Baby!"
+                txt: "Note test test test tes"
             }
         },
         // {
