@@ -1,7 +1,7 @@
 import { AppHome } from "./js/pages/app-home.jsx"
 import { AppAbout } from "./js/pages/app-about.jsx"
 import { EmailApp } from "./js/apps/mail/pages/EmailApp.jsx"
-import { KeepApp } from "./js/pages/KeepApp.jsx"
+import { KeepApp } from "./js/apps/keep/pages/KeepApp.jsx"
 import { BookApp } from './js/apps/book/pages/BookApp.jsx'
 import { BookDetails } from './js/apps/book/pages/BookDetails.jsx'
 import { Booksearch } from './js/apps/book/pages/BookSearch.jsx'

@@ -1,2 +1,5 @@
-@import './apps/book-app/bookList.css';
+@import './parts/fonts.css';
+@import './parts/base.css';
 @import './parts/helpers.css';
+@import './apps/book-app/bookList.css';
+@import './cmps/app-header.css';

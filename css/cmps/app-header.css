@@ -1,0 +1,25 @@
+.app-header {
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0 1.5rem 0.925rem;
+}
+
+.header-container {
+    height: 5rem;
+    width: 100vw;
+    font-size: 1.313rem;
+    text-align: center;
+}
+
+.header-container h1 {
+    cursor: pointer;
+}
+
+.app-nav {
+    height: 5rem;
+    padding: 2.2rem 0;
+}
+
+.app-nav li:not(:last-child) {
+    margin-inline-end: 1rem;
+}
+
