@@ -1,14 +1,14 @@
 import { AppHome } from "./js/pages/app-home.jsx"
 import { AppAbout } from "./js/pages/app-about.jsx"
-import { EmailApp } from "./js/pages/EmailApp.jsx"
+import { EmailApp } from "./js/apps/mail/pages/EmailApp.jsx"
 import { KeepApp } from "./js/pages/KeepApp.jsx"
 import { BookApp } from './js/apps/book/pages/BookApp.jsx'
 import { BookDetails } from './js/apps/book/pages/BookDetails.jsx'
 import { Booksearch } from './js/apps/book/pages/BookSearch.jsx'
 import { AppHeader } from './js/cmps/AppHeader.jsx';
 
-const Router = ReactRouterDOM.HashRouter
-const { Route, Switch } = ReactRouterDOM
+const Router = ReactRouterDOM.HashRouter;
+const { Route, Switch } = ReactRouterDOM;
 
 export function App() {
     return (
