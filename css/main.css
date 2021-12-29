@@ -3,3 +3,4 @@
 @import './parts/helpers.css';
 @import './apps/book-app/bookList.css';
 @import './cmps/app-header.css';
+@import './apps/book-app/email-app/email-preview.css'
