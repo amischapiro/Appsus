@@ -3,8 +3,8 @@
 @import './parts/helpers.css';
 @import './apps/book-app/bookList.css';
 @import './cmps/app-header.css';
-@import './apps/book-app/email-app/email-preview.css';
-@import './apps/book-app/email-app/email-app.css';
+@import './apps/email-app/email-preview.css';
+@import './apps/email-app/email-app.css';
 @import './cmps/app-home.css';
 @import './apps/keep-app/note-preview.css';
 @import './apps/keep-app/note-list.css';

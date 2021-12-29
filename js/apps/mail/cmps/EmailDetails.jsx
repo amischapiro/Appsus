@@ -8,6 +8,7 @@ export class EmailDetails extends React.Component{
 
     componentDidMount() {
         this.loadEmail()
+        
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -25,6 +26,8 @@ export class EmailDetails extends React.Component{
     }
 
     onGoBack = () => {
+        emailService.emailRead(this.state.email.id)
+        console.log('this.state.email:', this.state.email);
         this.props.history.push('/email')
     }
 
@@ -32,7 +35,10 @@ export class EmailDetails extends React.Component{
         const { id } = this.state.email
         emailService.removeEmail(id).then(() => {
             eventBusService.emit('user-msg', { txt: ` Email is deleted !`, type: 'danger' })
+            emailService.emailRead(this.state.email.id)
+            console.log('this.state.email:', this.state.email);
             this.onGoBack()
+            
         })
     }
     
