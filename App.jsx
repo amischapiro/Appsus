@@ -7,9 +7,6 @@ import { BookDetails } from './js/apps/book/pages/BookDetails.jsx'
 import { Booksearch } from './js/apps/book/pages/BookSearch.jsx'
 import { AppHeader } from './js/cmps/AppHeader.jsx';
 
-const Router = ReactRouterDOM.HashRouter;
-const { Route, Switch } = ReactRouterDOM;
-
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
 
