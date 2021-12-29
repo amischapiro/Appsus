@@ -1,0 +1,8 @@
+.note-preview{
+    width: 15rem;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem;
+    text-align: center;
+    background-color: rgb(201, 195, 195);
+}
