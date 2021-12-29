@@ -507,7 +507,6 @@ function _createBooks(){
     let books = _loadBooksFromStorage()
     if(!books||!books.length){
         books = gDefaultBooks
-        console.log('books:', books);
         
         books = books.map((book)=>{
             book.review = []
