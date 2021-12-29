@@ -6,3 +6,7 @@
     text-align: center;
     background-color: rgb(255, 224, 138);
 }
+
+.note-preview img {
+    max-width: 13rem;
+}
