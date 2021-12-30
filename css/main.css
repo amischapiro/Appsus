@@ -10,3 +10,5 @@
 @import './apps/keep-app/note-list.css';
 @import './apps/email-app/compose-modal.css';
 @import './cmps/user-msg.css';
+@import './apps/keep-app/add-note.css';
+@import './apps/keep-app/note-filter.css';

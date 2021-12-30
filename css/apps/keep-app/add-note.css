@@ -1,0 +1,14 @@
+.add-note-container {
+    border: 1px solid #e0e0e0;
+    padding: 8px 16px;
+    width:fit-content;
+    border-radius: 8px;
+}
+
+.add-note-container input {
+    border: none;
+}
+
+.add-note-container button {
+	background: none;
+}

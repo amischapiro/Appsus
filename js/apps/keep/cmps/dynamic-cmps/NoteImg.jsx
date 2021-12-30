@@ -3,7 +3,7 @@ export function NoteImg({info}) {
     return (
         <div>
             <img src={url} alt="" />
-            <h3>{title}</h3>
+            <input type="text" value={title} />
         </div>
     )
 }

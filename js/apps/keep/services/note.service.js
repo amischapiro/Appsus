@@ -10,9 +10,11 @@ export const noteService = {
 const KEY = 'noteDB';
 _createNotes();
 
-function query() {
+function query(filterBy = null) {
     const notes = _loadNotesFromStorage();
-    return Promise.resolve(notes);
+    if (!filterBy) return Promise.resolve(notes);
+    const filteredNotes = _getFilteredNotes(notes, filterBy);
+    return Promise.resolve(filteredNotes);
 }
 
 function removeNote(noteId) {
@@ -24,6 +26,15 @@ function removeNote(noteId) {
 
 function saveNote(noteToSave) {
     return noteToSave.id ? _updateNote(noteToSave) : _addNote(noteToSave);
+}
+
+function _getFilteredNotes(notes, filterBy) {
+    let {search, category} = filterBy;
+    // if(!category) category = '';
+    return notes.filter(note => {
+        return note.type.includes(category);
+    })
+
 }
 
 function _addNote(noteToSave) {
