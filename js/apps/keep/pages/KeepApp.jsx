@@ -2,6 +2,7 @@ import { Loader } from '../../../cmps/Loader.jsx';
 import { NoteList } from '../cmps/NoteList.jsx';
 import { noteService } from '../services/note.service.js';
 import { CreateNote } from '../cmps/CreateNote.jsx';
+import { FilterNote } from '../cmps/FilterNote.jsx';
 const { link } = ReactRouterDOM;
 
 export class KeepApp extends React.Component {
@@ -20,17 +21,20 @@ export class KeepApp extends React.Component {
 	};
 
 	onCreateNote = (txt) => {
-		noteService.saveNote(txt).then(this.loadNotes)
+		noteService.saveNote(txt).then(this.loadNotes);
 	};
 
 	render() {
 		const { notes } = this.state;
 		if (!notes) return <Loader />;
 		return (
-			<section className="keep-app flex justify-center">
-				<div className="container main-layout">
-					<CreateNote onCreateNote={this.onCreateNote} />
-					<NoteList notes={notes} />
+			<section className="keep-app">
+				<div className="container">
+					<FilterNote className="filter-display"/>
+					<div className="note-display-edit">
+						<CreateNote onCreateNote={this.onCreateNote} />
+						<NoteList notes={notes} />
+					</div>
 				</div>
 			</section>
 		);

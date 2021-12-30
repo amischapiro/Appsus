@@ -10,14 +10,9 @@ export class CreateNote extends React.Component {
 	handleChange = ({ target }) => {
 		const field = target.name;
 		const value = target.value;
-		this.setState(
-			(prevState) => ({
-				info: { ...prevState.info, [field]: value },
-			}),
-			// () => {
-			// 	this.props.onCreateNote(this.state.info);
-			// }
-		);
+		this.setState((prevState) => ({
+			info: { ...prevState.info, [field]: value },
+		}));
 	};
 
 	onSubmitNote = (ev) => {
@@ -39,18 +34,27 @@ export class CreateNote extends React.Component {
 			info: { txt },
 		} = this.state;
 		return (
-			<form className="add-note" onSubmit={this.onSubmitNote}>
-				<input
-					placeholder="Take a note..."
-					type="text"
-					id="write-note"
-					name="txt"
-					value={txt}
-					onChange={this.handleChange}
-				/>
-				<button className="primary-btn">i</button>
-				<button className="primary-btn">l</button>
-			</form>
+			<div className="add-note-container flex">
+				<form
+					className="add-note"
+					onSubmit={this.onSubmitNote}
+					autoComplete="off">
+					<input
+						placeholder="Take a note..."
+						type="text"
+						id="write-note"
+						name="txt"
+						value={txt}
+						onChange={this.handleChange}
+					/>
+				</form>
+				<button className="primary-btn">
+					<i className="far fa-check-square"></i>
+				</button>
+				<button className="primary-btn">
+					<i className="far fa-image"></i>
+				</button>
+			</div>
 		);
 	}
 }
