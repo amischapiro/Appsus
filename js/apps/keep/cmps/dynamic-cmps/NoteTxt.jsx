@@ -1,6 +1,6 @@
-import { noteService } from '../../services/note.service.js';
+// import { noteService } from '../../services/note.service.js';
 
-export function NoteTxt({ note }) {
+export function NoteTxt ({ note, onDeleteNote }) {
 	const {
 		info: { txt },
 	} = note;
@@ -8,7 +8,7 @@ export function NoteTxt({ note }) {
 		<div>
 			<input type="text" value={txt} />
 			<div className="note-actions">
-				<button onClick={() => noteService.removeNote(note.id)}>
+				<button onClick={() => onDeleteNote(note.id)}>
 					<i className="far fa-trash-alt"></i>
 				</button>
                 <button><i className="fas fa-thumbtack"></i></button>

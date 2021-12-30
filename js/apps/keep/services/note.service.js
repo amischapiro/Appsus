@@ -5,7 +5,9 @@ export const noteService = {
     query,
     removeNote,
     saveNote,
-    getYoutubeId
+    getYoutubeId,
+    addPinnedNote,
+    removePinnedNote
 }
 
 const KEY = 'noteDB';
@@ -34,6 +36,28 @@ function getYoutubeId(url) {
     const match = url.match(regExp);
 
     return Promise.resolve((match && match[2].length === 11) ? match[2] : null);
+}
+
+function addPinnedNote(noteId) {
+    let notes = _loadNotesFromStorage();
+    let pinnedNotes = _loadNotesFromStorage('pinnedNotesDB');
+    const noteIdx = notes.findIndex(note => note.id === noteId);
+    const pinnedNote = notes.splice(noteIdx, 1);
+    pinnedNotes.unshift(pinnedNote);
+    _saveNotesToStorage(notes);
+    _saveNotesToStorage('pinnedNotesDB', pinnedNotes);
+    return Promise.resolve();
+}
+
+function removePinnedNote(noteId) {
+    let notes = _loadNotesFromStorage();
+    let pinnedNotes = _loadNotesFromStorage('pinnedNotesDB');
+    const pinnedNoteIdx = pinnedNotes.findIndex(note => note.id === noteId);
+    const note = pinnedNotes.splice(pinnedNoteIdx, 1);
+    notes.unshift(note);
+    _saveNotesToStorage(notes);
+    _saveNotesToStorage('pinnedNotesDB', pinnedNotes);
+    return Promise.resolve();
 }
 
 function _getFilteredNotes(notes, filterBy) {
@@ -67,12 +91,12 @@ function _updateNote(noteToSave) {
     return;
 }
 
-function _saveNotesToStorage(notes) {
-    storageService.saveToStorage(KEY, notes);
+function _saveNotesToStorage(noteList = KEY, notes) {
+    storageService.saveToStorage(noteList, notes);
 }
 
-function _loadNotesFromStorage() {
-    return storageService.loadFromStorage(KEY);
+function _loadNotesFromStorage(noteList = KEY) {
+    return storageService.loadFromStorage(noteList);
 }
 
 function _createNotes() {
@@ -88,6 +112,9 @@ function _getNotes() {
             isPinned: false,
             info: {
                 txt: "Fullstack Me Baby!"
+            },
+            style: {
+                backgroundColor: "#fff"
             }
         },
         {
@@ -96,6 +123,9 @@ function _getNotes() {
             isPinned: false,
             info: {
                 txt: "another note attempt"
+            },
+            style: {
+                backgroundColor: "#fff"
             }
         },
         {
@@ -104,6 +134,9 @@ function _getNotes() {
             isPinned: false,
             info: {
                 txt: "Note test test test tes"
+            },
+            style: {
+                backgroundColor: "#fff"
             }
         },
         {
@@ -114,20 +147,20 @@ function _getNotes() {
                 title: "Bobi and Me"
             },
             style: {
-                backgroundColor: "#00d"
+                backgroundColor: "#fff"
             }
         },
-        {
-            id: utilService.makeId(),
-            type: "note-vid",
-            info: {
-                url: "https://www.youtube.com/watch?v=q7Xse0E_SzA&ab_channel=Channel5withAndrewCallaghan",
-                title: "Bobi and Me"
-            },
-            style: {
-                backgroundColor: "#00d"
-            }
-        },
+        // {
+        //     id: utilService.makeId(),
+        //     type: "note-vid",
+        //     info: {
+        //         url: "https://www.youtube.com/watch?v=q7Xse0E_SzA&ab_channel=Channel5withAndrewCallaghan",
+        //         title: "Bobi and Me"
+        //     },
+        //     style: {
+        //         backgroundColor: "#00d"
+        //     }
+        // },
         {
             id: utilService.makeId(),
             type: "note-todos",
@@ -137,6 +170,9 @@ function _getNotes() {
                     { txt: "Driving liscence", doneAt: null },
                     { txt: "Coding power", doneAt: 187111111 }
                 ]
+            },
+            style: {
+                backgroundColor: "#fff"
             }
         }
     ];
