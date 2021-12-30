@@ -10,7 +10,6 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
-        to: null
     },
     {
         id: utilService.makeId(),
@@ -19,7 +18,6 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
-        to: null
     },
     {
         id: utilService.makeId(),
@@ -28,7 +26,30 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
-        to: null
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'coding academy',
+        body: utilService.makeLorem(50),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'jordi@gmail.com',
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'coding academy',
+        body: utilService.makeLorem(50),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'jordi@gmail.com',
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'coding academy',
+        body: utilService.makeLorem(50),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'jordi@gmail.com',
     }
 
 ]
@@ -49,16 +70,19 @@ _createEmails()
 function query(filterBy = null) {
     const emails = _loadEmailsFromStorage()
     if (!filterBy) return Promise.resolve(emails)
-    const filteredEmails = _getFilteredEmails(emails, filterBy)
+    const filteredEmails = _getFilteredEmails(emails, filterBy)  
     return Promise.resolve(filteredEmails)
 }
 
 function _getFilteredEmails(emails, filterBy) {
-    let { subject, ctg } = filterBy
+    let { subject, ctg,readState } = filterBy
     const check = ctgFinder(ctg)
-    subject = subject ? subject: ''
+    const readBoolean = readState ==='read'? true : false
+    subject = subject ? subject: '' 
     return emails.filter(email => {
-        return (email.subject.includes(subject) && !email[check])
+        let isReadCheck = email.isRead===readBoolean
+        if(readState==='all'||!readState) isReadCheck = true
+        return (email.subject.includes(subject) && !email[check] && isReadCheck )
     })
 }
 
@@ -68,6 +92,9 @@ function ctgFinder(ctg) {
     }
     if (ctg === 'sent') {
         return 'from'
+    }
+    if (ctg === 'all') {
+        return null
     }
 }
 
@@ -105,12 +132,9 @@ function removeEmail(emailId) {
 }
 
 function sendEmail(email) {
-    console.log('email:', email);
-
     const emails = _loadEmailsFromStorage()
     email.id = utilService.makeId()
     email.isRead = true
-    email.from = null
     email.sentAt = Date.now()
     emails.unshift(email)
     _saveEmailsToStorage(emails)
@@ -120,14 +144,10 @@ function sendEmail(email) {
 
 function emailRead(emailId) {
     const emails = _loadEmailsFromStorage()
-    const email = getEmailById(emailId)
-    emails.map(currEmail => {
-        if (emailId === currEmail.id) {
-            currEmail.isRead = true
-            return email
-        }
-        return email
+    const readIdx = emails.findIndex(email=>{
+        return email.id ===emailId
     })
+    emails[readIdx].isRead = true
     _saveEmailsToStorage(emails)
     return Promise.resolve()
 }

@@ -1,0 +1,50 @@
+.compose-modal{
+    position: fixed;
+    display: flex;
+    background-color: blanchedalmond;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+}
+.gray-screen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    opacity: 0.5;
+}
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(54, 53, 53);
+    color: white;
+
+}
+.modal-header button{
+    margin: 0;
+}
+.modal-header h1{
+    margin: 0;
+    margin-top: 5px;
+}
+.compose-form{
+    display: flex;
+    flex-direction: column;
+}
+.compose-form input,.compose-form textarea{
+    border: none;
+    border-bottom: 1px gray solid;
+}
+/* .compose-form textarea{
+    
+} */
+.compose-form button{
+    width: 80px;
+    align-self: center;
+    margin: 0;
+    background-color: cornflowerblue;
+    color: white;
+}

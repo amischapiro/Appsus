@@ -7,6 +7,7 @@ import { BookDetails } from './js/apps/book/pages/BookDetails.jsx'
 import { Booksearch } from './js/apps/book/pages/BookSearch.jsx'
 import { AppHeader } from './js/cmps/AppHeader.jsx';
 import { EmailDetails } from "./js/apps/mail/cmps/EmailDetails.jsx"
+import { UserMsg } from "./js/cmps/user-msg.jsx"
 
 const Router = ReactRouterDOM.HashRouter;
 const { Route, Switch } = ReactRouterDOM;
@@ -28,6 +29,7 @@ export function App() {
                         <Route component={AppHome} path="/" />
                     </Switch>
                 </main>
+                <UserMsg/>
             </section>
         </Router>
     )

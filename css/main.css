@@ -8,3 +8,5 @@
 @import './cmps/app-home.css';
 @import './apps/keep-app/note-preview.css';
 @import './apps/keep-app/note-list.css';
+@import './apps/email-app/compose-modal.css';
+@import './cmps/user-msg.css';

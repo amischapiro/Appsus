@@ -9,7 +9,7 @@ export class EmailCtgs extends React.Component{
     state={
         isComposeShown:false,
         filterBy:{
-            ctg: 'inbox'
+            ctg: 'all'
 
         }
 
@@ -33,12 +33,14 @@ export class EmailCtgs extends React.Component{
 
 
         return <section className="email-ctgs">
+            <div className={`main-screen` + (isComposeShown ? ' gray-screen':'')} ></div>
             <button onClick={this.onToggleComposeModal} className="compose-btn">Compose</button>
             {isComposeShown && (
-                <ComposeEmail onToggleComposeModal={this.onToggleComposeModal}/>
+                <ComposeEmail onToggleComposeModal={this.onToggleComposeModal} loadEmails={this.props.loadEmails}/>
             )}
-            <button onClick={()=>this.onChangeCtg('inbox')}>Inbox</button>
-            <button onClick={()=>this.onChangeCtg('sent')} >Sent</button>
+            <button className={this.state.filterBy.ctg ==='all' ? 'active-ctg':''} onClick={()=>this.onChangeCtg('all')}>All Mail</button>
+            <button className={this.state.filterBy.ctg ==='inbox' ? 'active-ctg':''} onClick={()=>this.onChangeCtg('inbox')}>Inbox ({this.props.unread} unread)</button>
+            <button className={this.state.filterBy.ctg === 'sent'  ? 'active-ctg':''} onClick={()=>this.onChangeCtg('sent')} >Sent</button>
         </section>
     }
 }

@@ -17,6 +17,7 @@ export class ComposeEmail extends React.Component {
         const { email } = this.state;
         emailService.sendEmail(email)
         this.props.onToggleComposeModal();
+        this.props.loadEmails()
     }
 
     handleChange = ({ target }) => {
@@ -34,12 +35,12 @@ export class ComposeEmail extends React.Component {
 
     render() {
 
-        return <section>
-            <div>
+        return <section className="compose-modal">
+            <div className="modal-header">
                 <h1>New Message</h1>
-                <button className="btn-compose-modal" onClick={() => this.props.onToggleComposeModal()} >❌ </button>
+                <button className="btn-compose-modal" onClick={() => this.props.onToggleComposeModal()} >❌</button>
             </div>
-            <form onSubmit={this.sendEmail} className="compose-form" >
+            <div><form onSubmit={this.sendEmail} className="compose-form" autoComplete="off" >
                 <input type="text"
                     placeholder="To:"
                     name="to"
@@ -52,9 +53,10 @@ export class ComposeEmail extends React.Component {
                     id="subject"
                     onChange={this.handleChange}
                 />
-                <textarea name="body" id="body" cols="30" rows="10" onChange={this.handleChange}></textarea>
+                <textarea name="body" id="body" cols="30" rows="10" placeholder="body:" onChange={this.handleChange}></textarea>
                 <button>Send</button>
             </form>
+            </div>
         </section>
     }
 }

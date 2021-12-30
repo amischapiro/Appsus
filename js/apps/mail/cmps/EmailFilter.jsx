@@ -3,7 +3,8 @@
 export class EmailFilter extends React.Component{
     state={
         filterBy:{
-            subject:''
+            subject:'',
+            readState:'all'
         }
     }
 
@@ -39,6 +40,11 @@ export class EmailFilter extends React.Component{
                 value = {subject}
                 onChange={this.handleChange}
                  />
+                 <select name="readState" id="readState" onChange={this.handleChange}>
+                     <option value="all">All</option>
+                     <option value="unread">Unread</option>
+                     <option value="read">Read</option>
+                 </select>
                  <button>Filter</button>
 
 
