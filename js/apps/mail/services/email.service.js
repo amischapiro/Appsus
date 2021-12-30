@@ -10,6 +10,7 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
+        isStarred:false
     },
     {
         id: utilService.makeId(),
@@ -18,6 +19,7 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
+        isStarred:false
     },
     {
         id: utilService.makeId(),
@@ -26,6 +28,7 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
+        isStarred:false
     },
     {
         id: utilService.makeId(),
@@ -34,6 +37,7 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
+        isStarred:false
     },
     {
         id: utilService.makeId(),
@@ -42,6 +46,7 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
+        isStarred:false
     },
     {
         id: utilService.makeId(),
@@ -50,6 +55,7 @@ const gDefaultEmails = [
         isRead: false,
         sentAt: Date.now(),
         from: 'jordi@gmail.com',
+        isStarred:false
     }
 
 ]
@@ -59,7 +65,8 @@ export const emailService = {
     getEmailById,
     removeEmail,
     sendEmail,
-    emailRead
+    emailRead,
+    emailStarred
 
 }
 
@@ -82,19 +89,22 @@ function _getFilteredEmails(emails, filterBy) {
     return emails.filter(email => {
         let isReadCheck = email.isRead===readBoolean
         if(readState==='all'||!readState) isReadCheck = true
-        return (email.subject.includes(subject) && !email[check] && isReadCheck )
+        return (email.subject.includes(subject) && email[check] && isReadCheck )
     })
 }
 
 function ctgFinder(ctg) {
     if (ctg === 'inbox') {
-        return 'to'
-    }
-    if (ctg === 'sent') {
         return 'from'
     }
+    if (ctg === 'sent') {
+        return 'to'
+    }
+    if (ctg === 'starred') {
+        return 'isStarred'
+    }
     if (ctg === 'all') {
-        return null
+        return 'id'
     }
 }
 
@@ -136,6 +146,7 @@ function sendEmail(email) {
     email.id = utilService.makeId()
     email.isRead = true
     email.sentAt = Date.now()
+    email.isStarred = false
     emails.unshift(email)
     _saveEmailsToStorage(emails)
     return Promise.resolve()
@@ -151,3 +162,14 @@ function emailRead(emailId) {
     _saveEmailsToStorage(emails)
     return Promise.resolve()
 }
+
+function emailStarred(emailId,starState) {
+    const emails = _loadEmailsFromStorage()
+    const readIdx = emails.findIndex(email=>{
+        return email.id ===emailId
+    })
+    emails[readIdx].isStarred = starState
+    _saveEmailsToStorage(emails)
+    return Promise.resolve()
+}
+

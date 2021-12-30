@@ -32,7 +32,7 @@ export class EmailFilter extends React.Component{
 
         return(
             <form className="email-filter" onSubmit={this.onSubmitFilter} autoComplete="off">
-                <label htmlFor="by-subject">By Name:</label>
+                <label htmlFor="by-subject">By Subject:</label>
                 <input placeholder="Enter subject" 
                 type="text"
                 id="by-subject"

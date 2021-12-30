@@ -1,3 +1,10 @@
 .email-preview{
     border: 1px black solid;
 }
+.star{
+    font-weight: bold;
+    cursor: pointer;
+}
+.star.filled{
+    font-weight: lighter;
+}

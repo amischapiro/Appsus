@@ -11,23 +11,17 @@ export class EmailDetails extends React.Component{
         
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.match.params.emailId !== this.props.match.params.emailId) {
-            this.loadEmail()
-        }
-    }
+    
 
     loadEmail = () => {
         const { emailId } = this.props.match.params 
         emailService.getEmailById(emailId).then(email => {
-            if (!email) return this.props.history.push('/')
-            this.setState({ email })
+            if (!email) return this.props.history.push('/email')
+            this.setState({ email },()=>emailService.emailRead(emailId))
         })
     }
 
     onGoBack = () => {
-        emailService.emailRead(this.state.email.id)
-        console.log('this.state.email:', this.state.email);
         this.props.history.push('/email')
     }
 
@@ -35,12 +29,12 @@ export class EmailDetails extends React.Component{
         const { id } = this.state.email
         emailService.removeEmail(id).then(() => {
             eventBusService.emit('user-msg', { txt: ` Email is deleted !`, type: 'danger' })
-            emailService.emailRead(this.state.email.id)
-            console.log('this.state.email:', this.state.email);
             this.onGoBack()
             
         })
     }
+
+   
     
 
 

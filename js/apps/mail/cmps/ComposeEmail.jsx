@@ -1,4 +1,5 @@
 import { emailService } from "../services/email.service.js";
+import { eventBusService } from "../../../services/event-bus.service.js";
 
 
 export class ComposeEmail extends React.Component {
@@ -15,7 +16,9 @@ export class ComposeEmail extends React.Component {
     sendEmail = (ev) => {
         ev.preventDefault();
         const { email } = this.state;
-        emailService.sendEmail(email)
+        emailService.sendEmail(email).then(()=>{
+            eventBusService.emit('user-msg', { txt: ` Email sent!`, type: 'success' })
+        })
         this.props.onToggleComposeModal();
         this.props.loadEmails()
     }
