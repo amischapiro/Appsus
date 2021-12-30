@@ -4,7 +4,8 @@ import { utilService } from "../../../services/util.service.js";
 export const noteService = {
     query,
     removeNote,
-    saveNote
+    saveNote,
+    getYoutubeId
 }
 
 const KEY = 'noteDB';
@@ -28,11 +29,19 @@ function saveNote(noteToSave) {
     return noteToSave.id ? _updateNote(noteToSave) : _addNote(noteToSave);
 }
 
+function getYoutubeId(url) {
+    const regExp = /^.(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]).*/;
+    const match = url.match(regExp);
+
+    return Promise.resolve((match && match[2].length === 11) ? match[2] : null);
+}
+
 function _getFilteredNotes(notes, filterBy) {
-    let {search, category} = filterBy;
+    let { search, category } = filterBy;
     // if(!category) category = '';
     return notes.filter(note => {
-        return note.type.includes(category);
+        const targetName = note.type === 'note-txt' ? 'txt' : note.type === 'note-img' ? 'title' : 'label';
+        return note.type.includes(category) && (note.info[targetName].includes(search));
     })
 
 }
@@ -47,7 +56,7 @@ function _addNote(noteToSave) {
 
 function _createNote(noteToSave) {
     return {
-        id: utilService.makeId,
+        id: utilService.makeId(),
         type: "note-txt",
         isPinned: false,
         info: noteToSave
@@ -74,7 +83,7 @@ function _createNotes() {
 function _getNotes() {
     const notes = [
         {
-            id: utilService.makeId,
+            id: utilService.makeId(),
             type: "note-txt",
             isPinned: false,
             info: {
@@ -82,7 +91,7 @@ function _getNotes() {
             }
         },
         {
-            id: utilService.makeId,
+            id: utilService.makeId(),
             type: "note-txt",
             isPinned: false,
             info: {
@@ -90,7 +99,7 @@ function _getNotes() {
             }
         },
         {
-            id: utilService.makeId,
+            id: utilService.makeId(),
             type: "note-txt",
             isPinned: false,
             info: {
@@ -98,7 +107,7 @@ function _getNotes() {
             }
         },
         {
-            id: utilService.makeId,
+            id: utilService.makeId(),
             type: "note-img",
             info: {
                 url: "assets/img/fox.jpg",
@@ -109,7 +118,18 @@ function _getNotes() {
             }
         },
         {
-            id: utilService.makeId,
+            id: utilService.makeId(),
+            type: "note-vid",
+            info: {
+                url: "https://www.youtube.com/watch?v=q7Xse0E_SzA&ab_channel=Channel5withAndrewCallaghan",
+                title: "Bobi and Me"
+            },
+            style: {
+                backgroundColor: "#00d"
+            }
+        },
+        {
+            id: utilService.makeId(),
             type: "note-todos",
             info: {
                 label: "Get my stuff together",
