@@ -8,6 +8,7 @@ const { link } = ReactRouterDOM;
 export class KeepApp extends React.Component {
 	state = {
 		notes: null,
+		filterBy: null
 	};
 
 	componentDidMount() {
@@ -15,7 +16,8 @@ export class KeepApp extends React.Component {
 	}
 
 	loadNotes = () => {
-		noteService.query().then((notes) => {
+		const {filterBy} = this.state;
+		noteService.query(filterBy).then((notes) => {
 			this.setState({ notes });
 		});
 	};
@@ -24,17 +26,21 @@ export class KeepApp extends React.Component {
 		noteService.saveNote(txt).then(this.loadNotes);
 	};
 
+	onSetFilter = (filterBy) => {
+        this.setState({ filterBy }, this.loadNotes)
+    }
+
 	render() {
 		const { notes } = this.state;
 		if (!notes) return <Loader />;
 		return (
 			<section className="keep-app">
-				<div className="container">
-					<FilterNote className="filter-display"/>
-					<div className="note-display-edit">
-						<CreateNote onCreateNote={this.onCreateNote} />
-						<NoteList notes={notes} />
-					</div>
+				<div className="filter-display">
+					<FilterNote onSetFilter={this.onSetFilter} />
+				</div>
+				<div className="note-display-edit">
+					<CreateNote onCreateNote={this.onCreateNote} />
+					<NoteList notes={notes} />
 				</div>
 			</section>
 		);

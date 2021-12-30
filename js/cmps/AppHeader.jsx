@@ -4,7 +4,7 @@ class _AppHeader extends React.Component {
 	render() {
 		return (
 			<header className="app-header">
-				<div className="header-container flex justify-space-between main-layout">
+				<div className="header-container flex justify-space-between">
 					<h1 onClick={() => this.props.history.push('/')}>
 						<img src="../assets/img/logo.png" alt="" />
 					</h1>

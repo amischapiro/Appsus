@@ -1,13 +1,7 @@
 .keep-app {
     width: 100vw;
     margin-top: 2rem;
+    display: flex;
+
 }
 
-.keep-app.container {
-    display: flex;
-}
-
-.keep-app.container.filter-display {
-    display: flex;
-    flex-direction: column;
-}
