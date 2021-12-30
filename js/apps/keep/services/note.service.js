@@ -29,10 +29,11 @@ function saveNote(noteToSave) {
 }
 
 function _getFilteredNotes(notes, filterBy) {
-    let {search, category} = filterBy;
+    let { search, category } = filterBy;
     // if(!category) category = '';
     return notes.filter(note => {
-        return note.type.includes(category);
+        const targetName = note.type === 'note-txt' ? 'txt' : note.type === 'note-img' ? 'title' : 'label';
+        return note.type.includes(category) && (note.info[targetName].includes(search));
     })
 
 }
