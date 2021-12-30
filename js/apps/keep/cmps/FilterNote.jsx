@@ -55,18 +55,20 @@ export class FilterNote extends React.Component {
 					onChange={this.handleChange}
 				/>
 				<button value="" onClick={this.changeCtg}>
-					All notes
+					<i class="far fa-lightbulb"></i> All notes
 				</button>
 				<button value="note-txt" onClick={this.changeCtg}>
-					Simple notes
+					<i class="far fa-sticky-note"></i> Simple notes
 				</button>
 				<button value="note-todos" onClick={this.changeCtg}>
-					Lists
+					<i class="fas fa-list"></i> Lists
 				</button>
 				<button value="note-img" onClick={this.changeCtg}>
-					Images
+					<i class="far fa-images"></i> Images
 				</button>
-				<button>Videos</button>
+				<button>
+					<i class="fab fa-youtube"></i> Videos
+				</button>
 			</section>
 		);
 	}

@@ -2,3 +2,32 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.filter-notes button {
+	background: none;
+	text-align: left;
+	height: 2rem;
+	padding: 0.313rem;
+	padding-inline-start: 16px;
+	margin: 0;
+	border-radius: 0 20px 20px 0;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	letter-spacing: 0.01785714em;
+}
+
+.filter-notes button:hover {
+	background-color: rgb(231, 230, 230);
+}
+
+.filter-notes button i {
+	padding-inline-end: 16px;
+}
+
+.filter-notes input {
+    margin-inline-start: .5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 7px;
+    padding: 7px;
+}

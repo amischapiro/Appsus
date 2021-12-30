@@ -2,6 +2,12 @@
     width: 100vw;
     margin-top: 2rem;
     display: flex;
+}
 
+.note-display-edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
