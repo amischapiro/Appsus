@@ -43,11 +43,11 @@ export class EmailApp extends React.Component {
     render() {
 
         const { emails, filterBy, unread } = this.state
-        if (!emails.length) return <Loader />
+        if (!emails) return <Loader/>
         return (
             <section className="email-app">
                 <div><EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} /></div>
-                <div><EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} />
+                <div className="email-list-container"><EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} />
                 <EmailList emails={emails} loadEmails={this.loadEmails}/></div>
             </section>
 
@@ -57,9 +57,11 @@ export class EmailApp extends React.Component {
             //     </aside>
             //     <main>
             //         <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter}  />
-            //         <Switch>
-            //             <Route component={EmailList} path="/email/inbox" emails={emails} />
-            //             <Route component={EmailDetails} path="/email/:emailId" />
+            //         <Switch className="email-list-container">
+            //             <Route  path="/email"  > 
+            //             <EmailList emails={emails} loadEmails={this.loadEmails}/>
+            //             </Route>
+            //             <Route component={EmailDetails} path="/email/:emailId" /> 
             //         </Switch>
             //     </main>
             // </section>

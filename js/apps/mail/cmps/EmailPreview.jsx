@@ -13,11 +13,6 @@ export class EmailPreview extends React.Component{
    componentDidMount() {
        this.setState((prevState)=>({...prevState,isStarred:this.props.email.isStarred}))
    }
-   
-    getIcon= () => {
-        const icon = this.props.email.isRead ? 'read-icon' : 'unread-icon'
-        return icon 
-    }
     onToggleTxt = () => {
         this.setState((prevState) => ({ ...prevState, isLongTxt: !this.state.isLongTxt }));
         
@@ -36,15 +31,14 @@ export class EmailPreview extends React.Component{
     const {isLongTxt,isStarred} = this.state
     return (
         
-        <article className="email-preview" onClick={this.onToggleTxt}>
-            <h3>{email.subject}</h3> 
-            {email.from && <h5>From:"{email.from}"</h5>}
-            {email.to && <h5>To:"{email.to}"</h5>}
-            {/* <p>{email.body}</p> */}
-            <LongTxt text={email.body} isLongTxt={isLongTxt} onToggleTxt={this.onToggleTxt} />
-            <Link className="clean-link" to={`/email/${email.id}`} >[expand]</Link>
-            <img src={`../../assets/img/${this.getIcon()}.png`} /> 
+        <article className={`email-preview ${email.isRead ?'':'unread-bgc' } ${isLongTxt ? 'full-preview':''}`} onClick={this.onToggleTxt}>
+            <i className={email.isRead ? "far fa-envelope-open":"fas fa-envelope"} ></i> 
             <p className={`star ${isStarred?'filled':''}`} onClick={this.onToggleStar}>⭐</p>
+            <p className="preview-subject">{email.subject}</p> 
+            {email.from && <p className="to-from">From:"{email.from}"</p>}
+            {email.to && <p className="to-from">To:"{email.to}"</p>}
+            <LongTxt text={email.body} isLongTxt={isLongTxt} onToggleTxt={this.onToggleTxt} />
+            <Link className={`clean-link expand ${isLongTxt ? '':'hide'}`} to={`/email/${email.id}`} ><i className="fas fa-expand"></i></Link>
             
         </article>
         

@@ -8,7 +8,15 @@
     display: flex;
     flex-direction: column;
 }
-.email-ctgs div:not(:first-child){
+/* .email-ctgs div:not(:first-child){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 20px;
+} */
+.ctg{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +25,7 @@
     cursor: pointer;
     border-radius: 20px;
 }
-.email-ctgs div:not(:first-child):hover{
+.ctg:hover{
     background-color: rgba(0,0,0,0.1);
 }
 .email-ctgs div.active-ctg{
@@ -35,10 +43,18 @@
     width: fit-content;
     padding: 8px;
     height: 40px;
-    border: 0.5px lightslategray solid ;
+    border: 2px lightslategray solid ;
+    align-self: center; 
+}
+.email-ctgs div.compose-btn:hover{
+    background-color: white;
     box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-    align-self: center;
-    
-    
+}
+
+.email-list-container{
+    flex-grow: 1;
+}
+.no-emails{
+    text-align: center;
 }
 

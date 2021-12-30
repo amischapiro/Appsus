@@ -5,56 +5,56 @@ import { storageService } from "../../../services/storage.service.js";
 const gDefaultEmails = [
     {
         id: utilService.makeId(),
-        subject: 'I hate react',
+        subject: 'we want you!',
         body: utilService.makeLorem(50),
         isRead: false,
         sentAt: Date.now(),
-        from: 'jordi@gmail.com',
+        from: 'hackeru@gmail.com',
         isStarred:false
     },
     {
         id: utilService.makeId(),
-        subject: 'blah blah ',
+        subject: 'save us!',
         body: utilService.makeLorem(50),
         isRead: false,
         sentAt: Date.now(),
-        from: 'jordi@gmail.com',
+        from: 'timcook@apple.com',
         isStarred:false
     },
     {
         id: utilService.makeId(),
-        subject: 'coding academy',
+        subject: 'best student',
         body: utilService.makeLorem(50),
         isRead: false,
         sentAt: Date.now(),
-        from: 'jordi@gmail.com',
+        from: 'codingacademy@ca.com',
         isStarred:false
     },
     {
         id: utilService.makeId(),
-        subject: 'coding academy',
+        subject: 'come to us!',
         body: utilService.makeLorem(50),
         isRead: false,
         sentAt: Date.now(),
-        from: 'jordi@gmail.com',
+        from: 'jeffbezos@amazon.com',
         isStarred:false
     },
     {
         id: utilService.makeId(),
-        subject: 'coding academy',
+        subject: 'new tesla',
         body: utilService.makeLorem(50),
         isRead: false,
         sentAt: Date.now(),
-        from: 'jordi@gmail.com',
+        from: 'elonmusk@tesla.com',
         isStarred:false
     },
     {
         id: utilService.makeId(),
-        subject: 'coding academy',
+        subject: 'we give up',
         body: utilService.makeLorem(50),
         isRead: false,
         sentAt: Date.now(),
-        from: 'jordi@gmail.com',
+        from: 'johnbryce@gmail.com',
         isStarred:false
     }
 
@@ -82,18 +82,18 @@ function query(filterBy = null) {
 }
 
 function _getFilteredEmails(emails, filterBy) {
-    let { subject, ctg,readState } = filterBy
-    const check = ctgFinder(ctg)
-    const readBoolean = readState ==='read'? true : false
+    let { subject, ctg,readState } = filterBy  
+    const check = getCtg(ctg)
+    const readBoolean = readState ==='read'? true : false    
     subject = subject ? subject: '' 
     return emails.filter(email => {
         let isReadCheck = email.isRead===readBoolean
-        if(readState==='all'||!readState) isReadCheck = true
+        if(readState==='all'||!readState) isReadCheck = true  
         return (email.subject.includes(subject) && email[check] && isReadCheck )
-    })
+    }) 
 }
 
-function ctgFinder(ctg) {
+function getCtg(ctg) {
     if (ctg === 'inbox') {
         return 'from'
     }
@@ -103,7 +103,7 @@ function ctgFinder(ctg) {
     if (ctg === 'starred') {
         return 'isStarred'
     }
-    if (ctg === 'all') {
+    if (ctg === 'all'||!ctg) {
         return 'id'
     }
 }

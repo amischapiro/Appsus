@@ -10,7 +10,7 @@ export class EmailFilter extends React.Component{
 
     handleChange = ({target})=>{
         const field = target.name
-        const value = target.value
+        const value = target.value.toLowerCase()
         this.setState((prevState) => ({filterBy:{...prevState.filterBy,[field]:value}}),()=>{
             this.props.onSetFilter(this.state.filterBy)
         })
@@ -32,14 +32,15 @@ export class EmailFilter extends React.Component{
 
         return(
             <form className="email-filter" onSubmit={this.onSubmitFilter} autoComplete="off">
-                <label htmlFor="by-subject">By Subject:</label>
-                <input placeholder="Enter subject" 
+                <label htmlFor="by-subject"></label>
+                <input placeholder="Search subject:" 
                 type="text"
                 id="by-subject"
                 name="subject"
                 value = {subject}
                 onChange={this.handleChange}
                  />
+                 
                  <select name="readState" id="readState" onChange={this.handleChange}>
                      <option value="all">All</option>
                      <option value="unread">Unread</option>
