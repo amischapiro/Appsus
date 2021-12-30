@@ -9,7 +9,7 @@ export function NoteImg({ note }) {
 			<img src={url} alt="" />
 			<input type="text" value={title} />
 			<div className="note-actions">
-				<button onClick={() => noteService.removeNote(note.id)}>
+				<button onClick={() => onDeleteNote(note.id)}>
 					<i className="far fa-trash-alt"></i>
 				</button>
 				<button>
