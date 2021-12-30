@@ -9,6 +9,7 @@ export class KeepApp extends React.Component {
 	state = {
 		notes: null,
 		filterBy: null,
+		pinnedNotes: null
 	};
 
 	componentDidMount() {
@@ -39,7 +40,6 @@ export class KeepApp extends React.Component {
 	}
 
 	onDeleteNote = (noteId) => {
-		console.log(noteId)
 		noteService.removeNote(noteId).then(this.loadNotes);
 	};
 

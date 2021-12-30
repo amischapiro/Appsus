@@ -1,6 +1,6 @@
 import { noteService } from '../../services/note.service.js';
 
-export function NoteImg({ note }) {
+export function NoteImg({ note, onDeleteNote }) {
 	const {
 		info: { url, title },
 	} = note;

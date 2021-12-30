@@ -1,0 +1,4 @@
+.keep-app textarea:focus,
+.keep-app input:focus {
+	outline: none;
+}

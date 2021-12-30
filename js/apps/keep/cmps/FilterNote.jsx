@@ -53,20 +53,21 @@ export class FilterNote extends React.Component {
 					name="search"
 					value={search}
 					onChange={this.handleChange}
+					autoComplete="off"
 				/>
-				<button value="" onClick={this.changeCtg}>
+				<button value="" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === '') ? 'active-category' : ''} `}>
 					<i className="far fa-lightbulb"></i> All notes
 				</button>
-				<button value="note-txt" onClick={this.changeCtg}>
+				<button value="note-txt" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === 'note-txt') ? 'active-category' : ''} `}>
 					<i className="far fa-sticky-note"></i> Simple notes
 				</button>
-				<button value="note-todos" onClick={this.changeCtg}>
+				<button value="note-todos" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === 'note-todos') ? 'active-category' : ''} `}>
 					<i className="fas fa-list"></i> Lists
 				</button>
-				<button value="note-img" onClick={this.changeCtg}>
+				<button value="note-img" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === 'note-img') ? 'active-category' : ''} `}>
 					<i className="far fa-images"></i> Images
 				</button>
-				<button>
+				<button value="note-img" className={`category ${(this.state.filterBy.category === 'note-vid') ? 'active-category' : ''} `}>
 					<i className="fab fa-youtube"></i> Videos
 				</button>
 			</section>

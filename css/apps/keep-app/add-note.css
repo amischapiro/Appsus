@@ -1,15 +1,16 @@
 .add-note-container {
-    border: 1px solid #e0e0e0;
-    padding: 12px 16px;
-    width:fit-content;
-    height: 46px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
+	border: 1px solid #e0e0e0;
+	padding: 12px 16px;
+	width: fit-content;
+	height: 46px;
+	border-radius: 8px;
+	box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 10%),
+		inset 0 -1px 0 rgb(0 0 0 / 7%);
 }
 
 .add-note-container input {
-    border: none;
-    width: 360px;
+	border: none;
+	width: 360px;
 }
 
 .add-note-container button {

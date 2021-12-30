@@ -1,6 +1,6 @@
 import { noteService } from '../../services/note.service.js';
 
-export function NoteTodos({ note }) {
+export function NoteTodos({ note, onDeleteNote }) {
 	const {
 		info: { label, todos },
 	} = note;

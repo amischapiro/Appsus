@@ -1,6 +1,6 @@
 import { noteService } from '../../services/note.service.jsx';
 
-export function NoteVid({ note }) {
+export function NoteVid({ note, onDeleteNote }) {
 	const { url, title } = note;
 	const embedId = noteService.getYoutubeId(url);
 	const embededVid = 'https://www.youtube.com/embed/' + embedId;

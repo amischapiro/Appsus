@@ -10,7 +10,8 @@ export const noteService = {
     removePinnedNote
 }
 
-const KEY = 'noteDB';
+const NOTE_KEY = 'noteDB';
+const PINNED_KEY = 'pinnedNoteDB';
 _createNotes();
 
 function query(filterBy = null) {
@@ -40,23 +41,23 @@ function getYoutubeId(url) {
 
 function addPinnedNote(noteId) {
     let notes = _loadNotesFromStorage();
-    let pinnedNotes = _loadNotesFromStorage('pinnedNotesDB');
+    let pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
     const noteIdx = notes.findIndex(note => note.id === noteId);
     const pinnedNote = notes.splice(noteIdx, 1);
     pinnedNotes.unshift(pinnedNote);
     _saveNotesToStorage(notes);
-    _saveNotesToStorage('pinnedNotesDB', pinnedNotes);
+    _saveNotesToStorage(PINNED_KEY, pinnedNotes);
     return Promise.resolve();
 }
 
 function removePinnedNote(noteId) {
     let notes = _loadNotesFromStorage();
-    let pinnedNotes = _loadNotesFromStorage('pinnedNotesDB');
+    let pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
     const pinnedNoteIdx = pinnedNotes.findIndex(note => note.id === noteId);
     const note = pinnedNotes.splice(pinnedNoteIdx, 1);
     notes.unshift(note);
     _saveNotesToStorage(notes);
-    _saveNotesToStorage('pinnedNotesDB', pinnedNotes);
+    _saveNotesToStorage(PINNED_KEY, pinnedNotes);
     return Promise.resolve();
 }
 
@@ -91,12 +92,12 @@ function _updateNote(noteToSave) {
     return;
 }
 
-function _saveNotesToStorage(noteList = KEY, notes) {
-    storageService.saveToStorage(noteList, notes);
+function _saveNotesToStorage(notes, key = NOTE_KEY) {
+    storageService.saveToStorage(key, notes);
 }
 
-function _loadNotesFromStorage(noteList = KEY) {
-    return storageService.loadFromStorage(noteList);
+function _loadNotesFromStorage(key = NOTE_KEY) {
+    return storageService.loadFromStorage(key);
 }
 
 function _createNotes() {
@@ -144,7 +145,7 @@ function _getNotes() {
             type: "note-img",
             info: {
                 url: "assets/img/fox.jpg",
-                title: "Bobi and Me"
+                title: "Bobi and I"
             },
             style: {
                 backgroundColor: "#fff"
