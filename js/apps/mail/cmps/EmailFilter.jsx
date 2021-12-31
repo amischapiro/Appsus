@@ -5,7 +5,9 @@ export class EmailFilter extends React.Component{
         filterBy:{
             subject:'',
             readState:'all'
-        }
+        },
+        sortBy:'date'
+
     }
 
     handleChange = ({target})=>{
@@ -24,6 +26,11 @@ export class EmailFilter extends React.Component{
         this.setState({filterBy:{subject:''}})
     }
 
+    onChangeSort = ({target})=>{
+        const value = target.value
+        this.setState(()=>({sortBy:value}),()=>this.props.onSetSort(this.state.sortBy))
+    }
+
 
 
 
@@ -32,7 +39,7 @@ export class EmailFilter extends React.Component{
 
         return(
             <form className="email-filter" onSubmit={this.onSubmitFilter} autoComplete="off">
-                <label htmlFor="by-subject"></label>
+                <div>
                 <input placeholder="Search subject:" 
                 type="text"
                 id="by-subject"
@@ -40,13 +47,24 @@ export class EmailFilter extends React.Component{
                 value = {subject}
                 onChange={this.handleChange}
                  />
+                 <button>Search</button>
+                 </div>
                  
+                 <div>
+                 Filter By:
                  <select name="readState" id="readState" onChange={this.handleChange}>
                      <option value="all">All</option>
                      <option value="unread">Unread</option>
                      <option value="read">Read</option>
                  </select>
-                 <button>Filter</button>
+                 </div>
+                 <div>
+                 Sort by:
+                 <select name="sort-by" id="sort-by" onChange={this.onChangeSort} >
+                    <option value="date">Date</option>
+                    <option value="subject">Subject</option>
+                 </select>
+                 </div>
 
 
 

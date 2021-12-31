@@ -11,15 +11,16 @@ export class EmailApp extends React.Component {
     state = {
         emails: [],
         filterBy: null,
-        unread: null
+        unread: null,
+        sortBy:'date'
     }
     componentDidMount() {
         this.loadEmails()
     }
 
     loadEmails = () => {
-        const { filterBy } = this.state
-        emailService.query(filterBy).then(emails => {
+        const { filterBy,sortBy } = this.state
+        emailService.query(filterBy,sortBy).then(emails => {
             this.setState({ emails })
         })
         setTimeout(() => {
@@ -37,34 +38,37 @@ export class EmailApp extends React.Component {
     onSetFilter = (filterBy) => {
         this.setState({ filterBy }, this.loadEmails)
     }
+    onSetSort = (sortBy) =>{
+        this.setState({sortBy},this.loadEmails)
+    }
 
 
 
     render() {
 
-        const { emails, filterBy, unread } = this.state
+        const { emails, filterBy, unread, sortBy } = this.state
         if (!emails) return <Loader/>
         return (
-            <section className="email-app">
-                <div><EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} /></div>
-                <div className="email-list-container"><EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} />
-                <EmailList emails={emails} loadEmails={this.loadEmails}/></div>
-            </section>
-
             // <section className="email-app">
-            //     <aside>
-            //     <EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} />
-            //     </aside>
-            //     <main>
-            //         <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter}  />
-            //         <Switch className="email-list-container">
-            //             <Route  path="/email"  > 
-            //             <EmailList emails={emails} loadEmails={this.loadEmails}/>
-            //             </Route>
-            //             <Route component={EmailDetails} path="/email/:emailId" /> 
-            //         </Switch>
-            //     </main>
+            //     <div><EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} /></div>
+            //     <div className="email-list-container"><EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} sortBy={sortBy} onSetSort={this.onSetSort} />
+            //     <EmailList emails={emails} loadEmails={this.loadEmails}/></div>
             // </section>
+
+            <section className="email-app">
+                <aside>
+                <EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} />
+                </aside>
+                <main>
+                    <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter}  />
+                    <Switch className="email-list-container">
+                        <Route component={EmailDetails} path="/email/:emailId" /> 
+                        <Route  path="/email"  > 
+                        <EmailList emails={emails} loadEmails={this.loadEmails}/>
+                        </Route>
+                    </Switch>
+                </main>
+            </section>
 
         )
     }

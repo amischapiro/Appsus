@@ -8,19 +8,11 @@
     display: flex;
     flex-direction: column;
 }
-/* .email-ctgs div:not(:first-child){
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    cursor: pointer;
-    border-radius: 20px;
-} */
+
 .ctg{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: rgb(139, 77, 77); */
     height: 40px;
     cursor: pointer;
     border-radius: 20px;
@@ -57,4 +49,14 @@
 .no-emails{
     text-align: center;
 }
+.email-filter{
+    display: flex;
+}
+.email-filter>*{
+    margin-right: 20px;
+}
 
+.email-ctgs{
+    height: 100vh;
+    background-color: rgb(223, 255, 223);
+}

@@ -18,7 +18,8 @@ export class EmailPreview extends React.Component{
         
       };
 
-      onToggleStar = () =>{
+      onToggleStar = (ev) =>{
+          ev.stopPropagation()
         this.setState((prevState) => ({ ...prevState, isStarred: !this.state.isStarred }),()=>
         emailService.emailStarred(this.props.email.id,this.state.isStarred))
         setTimeout(() => {
