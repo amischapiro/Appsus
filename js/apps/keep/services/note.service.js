@@ -7,7 +7,8 @@ export const noteService = {
     saveNote,
     getYoutubeId,
     addPinnedNote,
-    removePinnedNote
+    removePinnedNote,
+    queryPinned
 }
 
 const NOTE_KEY = 'noteDB';
@@ -18,6 +19,13 @@ function query(filterBy = null) {
     const notes = _loadNotesFromStorage();
     if (!filterBy) return Promise.resolve(notes);
     const filteredNotes = _getFilteredNotes(notes, filterBy);
+    return Promise.resolve(filteredNotes);
+}
+
+function queryPinned(filterBy = null) {
+    const pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
+    if (!filterBy) return Promise.resolve(pinnedNotes);
+    const filteredNotes = _getFilteredNotes(pinnedNotes, filterBy);
     return Promise.resolve(filteredNotes);
 }
 
@@ -44,9 +52,9 @@ function addPinnedNote(noteId) {
     let pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
     const noteIdx = notes.findIndex(note => note.id === noteId);
     const pinnedNote = notes.splice(noteIdx, 1);
-    pinnedNotes.unshift(pinnedNote);
+    pinnedNotes.unshift(pinnedNote[0]);
     _saveNotesToStorage(notes);
-    _saveNotesToStorage(PINNED_KEY, pinnedNotes);
+    _saveNotesToStorage(pinnedNotes, PINNED_KEY);
     return Promise.resolve();
 }
 
@@ -55,9 +63,9 @@ function removePinnedNote(noteId) {
     let pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
     const pinnedNoteIdx = pinnedNotes.findIndex(note => note.id === noteId);
     const note = pinnedNotes.splice(pinnedNoteIdx, 1);
-    notes.unshift(note);
+    notes.unshift(note[0]);
     _saveNotesToStorage(notes);
-    _saveNotesToStorage(PINNED_KEY, pinnedNotes);
+    _saveNotesToStorage(pinnedNotes, PINNED_KEY);
     return Promise.resolve();
 }
 
@@ -83,7 +91,6 @@ function _createNote(noteToSave) {
     return {
         id: utilService.makeId(),
         type: "note-txt",
-        isPinned: false,
         info: noteToSave
     }
 }
@@ -102,7 +109,9 @@ function _loadNotesFromStorage(key = NOTE_KEY) {
 
 function _createNotes() {
     const notes = (_loadNotesFromStorage()) ? _loadNotesFromStorage() : _getNotes();
+    const pinnedNotes = (_loadNotesFromStorage(PINNED_KEY)) ? _loadNotesFromStorage(PINNED_KEY) : _getPinnedNotes();
     _saveNotesToStorage(notes);
+    _saveNotesToStorage(pinnedNotes, PINNED_KEY);
 }
 
 function _getNotes() {
@@ -110,7 +119,6 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
-            isPinned: false,
             info: {
                 txt: "Fullstack Me Baby!"
             },
@@ -121,7 +129,6 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
-            isPinned: false,
             info: {
                 txt: "another note attempt"
             },
@@ -132,7 +139,6 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
-            isPinned: false,
             info: {
                 txt: "Note test test test tes"
             },
@@ -154,6 +160,7 @@ function _getNotes() {
         // {
         //     id: utilService.makeId(),
         //     type: "note-vid",
+        // isPinned: false,
         //     info: {
         //         url: "https://www.youtube.com/watch?v=q7Xse0E_SzA&ab_channel=Channel5withAndrewCallaghan",
         //         title: "Bobi and Me"
@@ -179,4 +186,21 @@ function _getNotes() {
     ];
 
     return notes;
+}
+
+function _getPinnedNotes() {
+    const pinnedNotes = [
+        {
+            id: utilService.makeId(),
+            type: "note-txt",
+            info: {
+                txt: "Important note"
+            },
+            style: {
+                backgroundColor: "#fff"
+            }
+        },
+    ];
+
+    return pinnedNotes;
 }

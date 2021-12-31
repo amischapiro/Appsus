@@ -9,7 +9,7 @@ export class KeepApp extends React.Component {
 	state = {
 		notes: null,
 		filterBy: null,
-		pinnedNotes: null
+		pinnedNotes: null,
 	};
 
 	componentDidMount() {
@@ -18,9 +18,16 @@ export class KeepApp extends React.Component {
 
 	loadNotes = () => {
 		const { filterBy } = this.state;
-		noteService.query(filterBy).then((notes) => {
-			this.setState({ notes });
-		});
+		noteService
+			.query(filterBy)
+			.then((notes) => {
+				this.setState({ notes });
+			})
+			.then(
+				noteService.queryPinned(filterBy).then((pinnedNotes) => {
+					this.setState({ pinnedNotes });
+				})
+			);
 	};
 
 	onCreateNote = (txt) => {
@@ -33,19 +40,19 @@ export class KeepApp extends React.Component {
 
 	onPinNote = (noteId) => {
 		noteService.addPinnedNote(noteId).then(this.loadNotes);
-	}
+	};
 
 	onUnpinNote = (noteId) => {
 		noteService.removePinnedNote(noteId).then(this.loadNotes);
-	}
+	};
 
 	onDeleteNote = (noteId) => {
 		noteService.removeNote(noteId).then(this.loadNotes);
 	};
 
 	render() {
-		const { notes } = this.state;
-		if (!notes) return <Loader />;
+		const { notes, pinnedNotes } = this.state;
+		if (!notes || !pinnedNotes) return <Loader />;
 		return (
 			<section className="keep-app">
 				<div className="filter-display">
@@ -53,7 +60,18 @@ export class KeepApp extends React.Component {
 				</div>
 				<div className="note-display-edit">
 					<CreateNote onCreateNote={this.onCreateNote} />
-					<NoteList notes={notes} onDeleteNote={this.onDeleteNote} />
+					<h3>PINNED</h3>
+					<NoteList
+						notes={pinnedNotes}
+						onDeleteNote={this.onDeleteNote}
+						onPinHandle={this.onUnpinNote}
+					/>
+					<h3>OTHERS</h3>
+					<NoteList
+						notes={notes}
+						onDeleteNote={this.onDeleteNote}
+						onPinHandle={this.onPinNote}
+					/>
 				</div>
 			</section>
 		);

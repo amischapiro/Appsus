@@ -3,14 +3,14 @@ import { NoteTodos } from "./NoteTodos.jsx";
 import { NoteTxt } from "./NoteTxt.jsx";
 import { NoteVid } from "./NoteVid.jsx";
 
-export function DynamicCmp({note, onDeleteNote}) {
+export function DynamicCmp({note, onDeleteNote, onPinHandle}) {
     switch(note.type) {
         case 'note-img':
-            return <NoteImg note={note} onDeleteNote={onDeleteNote} />
+            return <NoteImg note={note} onDeleteNote={onDeleteNote} onPinHandle={onPinHandle} />
         case 'note-todos':
-            return <NoteTodos note={note} onDeleteNote={onDeleteNote} />
+            return <NoteTodos note={note} onDeleteNote={onDeleteNote} onPinHandle={onPinHandle} />
         case 'note-txt':
-            return <NoteTxt note={note} onDeleteNote={onDeleteNote} />
+            return <NoteTxt note={note} onDeleteNote={onDeleteNote} onPinHandle={onPinHandle} />
         // case 'note-vid':
         //     return <NoteVid {...props.note} />
         default:

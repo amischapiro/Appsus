@@ -59,16 +59,16 @@ export class FilterNote extends React.Component {
 					<i className="far fa-lightbulb"></i> All notes
 				</button>
 				<button value="note-txt" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === 'note-txt') ? 'active-category' : ''} `}>
-					<i className="far fa-sticky-note"></i> Simple notes
+					<i className="far fa-sticky-note"></i>Simple notes
 				</button>
 				<button value="note-todos" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === 'note-todos') ? 'active-category' : ''} `}>
-					<i className="fas fa-list"></i> Lists
+					<i className="fas fa-list"></i>Lists
 				</button>
 				<button value="note-img" onClick={this.changeCtg} className={`category ${(this.state.filterBy.category === 'note-img') ? 'active-category' : ''} `}>
-					<i className="far fa-images"></i> Images
+					<i className="far fa-images"></i>Images
 				</button>
 				<button value="note-img" className={`category ${(this.state.filterBy.category === 'note-vid') ? 'active-category' : ''} `}>
-					<i className="fab fa-youtube"></i> Videos
+					<i className="fab fa-youtube"></i>Videos
 				</button>
 			</section>
 		);

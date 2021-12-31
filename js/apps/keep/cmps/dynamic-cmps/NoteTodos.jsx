@@ -1,6 +1,6 @@
 import { noteService } from '../../services/note.service.js';
 
-export function NoteTodos({ note, onDeleteNote }) {
+export function NoteTodos({ note, onDeleteNote, onPinHandle }) {
 	const {
 		info: { label, todos },
 	} = note;
@@ -14,11 +14,11 @@ export function NoteTodos({ note, onDeleteNote }) {
 				})}
 			</ul>
 			<div className="note-actions">
+				<button onClick={() => onPinHandle(note.id)}>
+					<i className="fas fa-thumbtack" ></i>
+				</button>
 				<button onClick={() => onDeleteNote(note.id)}>
 					<i className="far fa-trash-alt"></i>
-				</button>
-				<button>
-					<i className="fas fa-thumbtack"></i>
 				</button>
 				<button>
 					<i className="fas fa-palette"></i>
