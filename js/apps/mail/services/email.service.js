@@ -74,12 +74,30 @@ const KEY = 'emailDB'
 
 _createEmails()
 
-function query(filterBy = null) {
-    const emails = _loadEmailsFromStorage()
+function query(filterBy = null,sortBy) {
+    let emails = _loadEmailsFromStorage()
+    if(sortBy==='date'){
+        emails.sort(function(x,y){
+            return y.sentAt - x.sentAt
+        })
+    }
+    if(sortBy==='subject'){
+        emails.sort(function(a,b){
+            if(a.subject<b.subject){
+                return -1
+            }
+            if(a.subject>b.subject){
+                return 1
+            }
+            return 0 
+        })
+    }
     if (!filterBy) return Promise.resolve(emails)
     const filteredEmails = _getFilteredEmails(emails, filterBy)  
     return Promise.resolve(filteredEmails)
 }
+
+
 
 function _getFilteredEmails(emails, filterBy) {
     let { subject, ctg,readState } = filterBy  
