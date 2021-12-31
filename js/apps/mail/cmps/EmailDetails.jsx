@@ -19,6 +19,7 @@ export class EmailDetails extends React.Component{
             if (!email) return this.props.history.push('/email')
             this.setState({ email },()=>emailService.emailRead(emailId))
         })
+        // this.props.loadEmails()
     }
 
     onGoBack = () => {
@@ -32,6 +33,7 @@ export class EmailDetails extends React.Component{
             this.onGoBack()
             
         })
+        // this.props.loadEmails()
     }
 
    
