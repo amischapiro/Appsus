@@ -39,7 +39,7 @@ export class EmailPreview extends React.Component{
             {email.from && <p className="to-from">From:"{email.from}"</p>}
             {email.to && <p className="to-from">To:"{email.to}"</p>}
             <LongTxt text={email.body} isLongTxt={isLongTxt} onToggleTxt={this.onToggleTxt} />
-            <Link className={`clean-link expand ${isLongTxt ? '':'hide'}`} to={`/email/${email.id}`} ><i className="fas fa-expand"></i></Link>
+            <Link className={`clean-link expand ${isLongTxt ? '':'hide'}`} to={`/email/${email.id}`}  ><i className="fas fa-expand"></i></Link>
             
         </article>
         

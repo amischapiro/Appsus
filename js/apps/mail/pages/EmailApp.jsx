@@ -60,7 +60,7 @@ export class EmailApp extends React.Component {
                 <EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} />
                 </aside>
                 <main>
-                    <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter}  />
+                    <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} sortBy={sortBy} onSetSort={this.onSetSort} />
                     <Switch className="email-list-container">
                         <Route component={EmailDetails} path="/email/:emailId" /> 
                         <Route  path="/email"  > 
