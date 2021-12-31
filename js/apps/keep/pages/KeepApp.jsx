@@ -1,5 +1,6 @@
 import { Loader } from '../../../cmps/Loader.jsx';
 import { NoteList } from '../cmps/NoteList.jsx';
+import { PinnedNoteList } from '../cmps/PinnedNoteList.jsx';
 import { noteService } from '../services/note.service.js';
 import { CreateNote } from '../cmps/CreateNote.jsx';
 import { FilterNote } from '../cmps/FilterNote.jsx';
@@ -46,8 +47,8 @@ export class KeepApp extends React.Component {
 		noteService.removePinnedNote(noteId).then(this.loadNotes);
 	};
 
-	onDeleteNote = (noteId) => {
-		noteService.removeNote(noteId).then(this.loadNotes);
+	onDeleteNote = (noteId, isPinned) => {
+		noteService.removeNote(noteId, isPinned).then(this.loadNotes);
 	};
 	
 	onCloneNote = (noteId, isPinned) => {
@@ -64,14 +65,12 @@ export class KeepApp extends React.Component {
 				</div>
 				<div className="note-display-edit">
 					<CreateNote onCreateNote={this.onCreateNote} />
-					<h3>PINNED</h3>
-					<NoteList
+					<PinnedNoteList
 						notes={pinnedNotes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onUnpinNote}
 						onCloneNote={this.onCloneNote}
 					/>
-					<h3>OTHERS</h3>
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}

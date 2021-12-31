@@ -23,7 +23,7 @@ export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 				<button>
 					<i className="far fa-envelope"></i>
 				</button>
-				<button onClick={() => onDeleteNote(note.id)}>
+				<button onClick={() => onDeleteNote(note.id, note.isPinned)}>
 					<i className="far fa-trash-alt"></i>
 				</button>
 				<button onClick={() => onCloneNote(note.id, note.isPinned)}>

@@ -30,10 +30,11 @@ function queryPinned(filterBy = null) {
     return Promise.resolve(filteredNotes);
 }
 
-function removeNote(noteId) {
-    let notes = _loadNotesFromStorage();
+function removeNote(noteId, isPinned = false) {
+    let notes = !isPinned ? _loadNotesFromStorage() : _loadNotesFromStorage(PINNED_KEY);
     notes = notes.filter(note => note.id !== noteId);
-    _saveNotesToStorage(notes);
+    if(!isPinned) _saveNotesToStorage(notes);
+    else _saveNotesToStorage(notes, PINNED_KEY);
     return Promise.resolve();
 }
 

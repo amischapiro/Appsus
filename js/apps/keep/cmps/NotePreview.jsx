@@ -1,5 +1,4 @@
 import { DynamicCmp } from './dynamic-cmps/DynamicCmp.jsx';
-const { link } = ReactRouterDOM;
 
 export function NotePreview({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 	return (
