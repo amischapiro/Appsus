@@ -1,9 +1,9 @@
 .note-preview{
-    width: 15rem;
+    width: 16rem;
     height: fit-content;
     padding: 1rem 1rem 0.313rem;
     border-radius: 8px;
-    margin: 1rem;
+    margin: .5rem;
     text-align: center;
     border: 1px solid #e0e0e0;
 }
@@ -23,8 +23,22 @@
 
 .note-preview button {
     background: none;
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
 }
 
 .note-preview button:hover{
-    background-color: #ecececbc;
+    background-color: #ddddddbc;
+}
+
+.fas.fa-thumbtack {
+    color: transparent;
+   -webkit-text-stroke-width: 1.2px;
+   -webkit-text-stroke-color: rgb(27, 27, 27);
+}
+.fas.fa-palette {
+    color: transparent;
+   -webkit-text-stroke-width: 1.2px;
+   -webkit-text-stroke-color: rgb(27, 27, 27);
 }

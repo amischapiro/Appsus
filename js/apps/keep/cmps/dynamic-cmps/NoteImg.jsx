@@ -1,11 +1,11 @@
-import { noteService } from '../../services/note.service.js';
+import { ColorInput } from "../ChangeBakcground.jsx";
 
-export function NoteImg({ note, onDeleteNote, onPinHandle, onCloneNote }) {
+export function NoteImg({ note, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
 	const {
 		info: { url, title },
 	} = note;
 	return (
-		<div>
+		<div style={{ backgroundColor: note.style.backgroundColor }}>
 			<img src={url} alt="" />
 			{/* <input type="text" value={title} /> */}
 			<h3>{title}</h3>
@@ -13,7 +13,7 @@ export function NoteImg({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button>
+				<button onClick={() => <ColorInput note={note} onChangeBackground={onChangeBackground}/>}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>

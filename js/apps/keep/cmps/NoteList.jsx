@@ -1,6 +1,6 @@
 import { NotePreview } from './NotePreview.jsx';
 
-export function NoteList({ notes, onDeleteNote, onPinHandle, onCloneNote }) {
+export function NoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
 	if (!notes.length)
 		return (
 			<div className="no-notes">
@@ -18,6 +18,7 @@ export function NoteList({ notes, onDeleteNote, onPinHandle, onCloneNote }) {
 						onDeleteNote={onDeleteNote}
 						onPinHandle={onPinHandle}
 						onCloneNote={onCloneNote}
+                        onChangeBackground={onChangeBackground}
 					/>
 				))}
 			</div>

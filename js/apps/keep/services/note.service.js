@@ -9,7 +9,8 @@ export const noteService = {
     addPinnedNote,
     removePinnedNote,
     queryPinned,
-    cloneNote
+    cloneNote,
+    changeNoteBgc
 }
 
 const NOTE_KEY = 'noteDB';
@@ -33,7 +34,7 @@ function queryPinned(filterBy = null) {
 function removeNote(noteId, isPinned = false) {
     let notes = !isPinned ? _loadNotesFromStorage() : _loadNotesFromStorage(PINNED_KEY);
     notes = notes.filter(note => note.id !== noteId);
-    if(!isPinned) _saveNotesToStorage(notes);
+    if (!isPinned) _saveNotesToStorage(notes);
     else _saveNotesToStorage(notes, PINNED_KEY);
     return Promise.resolve();
 }
@@ -77,10 +78,19 @@ function cloneNote(noteId, isPinned) {
     let noteList = isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
     //use find
     let noteToDup = noteList.find(note => note.id === noteId);
-    const dupedNote = {...noteToDup};
+    const dupedNote = { ...noteToDup };
     dupedNote.id = utilService.makeId();
     noteList.unshift(dupedNote);
-    if(isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    if (isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    else _saveNotesToStorage(noteList);
+    return Promise.resolve();
+}
+
+function changeNoteBgc(noteId, isPinned, bgc) {
+    let noteList = isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
+    const noteIdx = noteList.findIndex(note => note.id === noteId);
+    noteList[noteIdx].style.backgroundColor = bgc;
+    if (isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
     return Promise.resolve();
 }
@@ -108,7 +118,10 @@ function _createNote(noteToSave) {
         id: utilService.makeId(),
         type: "note-txt",
         isPinned: false,
-        info: noteToSave
+        info: noteToSave,
+        style: {
+            backgroundColor: "#fff"
+        }
     }
 }
 

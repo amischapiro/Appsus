@@ -3,7 +3,7 @@ import { NoteTodos } from './NoteTodos.jsx';
 import { NoteTxt } from './NoteTxt.jsx';
 import { NoteVid } from './NoteVid.jsx';
 
-export function DynamicCmp({ note, onDeleteNote, onPinHandle, onCloneNote }) {
+export function DynamicCmp({ note, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
 	switch (note.type) {
 		case 'note-img':
 			return (
@@ -12,6 +12,7 @@ export function DynamicCmp({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 					onDeleteNote={onDeleteNote}
 					onPinHandle={onPinHandle}
 					onCloneNote={onCloneNote}
+                    onChangeBackground={onChangeBackground}
 				/>
 			);
 		case 'note-todos':
@@ -21,6 +22,7 @@ export function DynamicCmp({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 					onDeleteNote={onDeleteNote}
 					onPinHandle={onPinHandle}
                     onCloneNote={onCloneNote}
+                    onChangeBackground={onChangeBackground}
 				/>
 			);
 		case 'note-txt':
@@ -30,6 +32,7 @@ export function DynamicCmp({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 					onDeleteNote={onDeleteNote}
 					onPinHandle={onPinHandle}
                     onCloneNote={onCloneNote}
+                    onChangeBackground={onChangeBackground}
 				/>
 			);
 		// case 'note-vid':

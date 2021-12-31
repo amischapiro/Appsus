@@ -50,10 +50,14 @@ export class KeepApp extends React.Component {
 	onDeleteNote = (noteId, isPinned) => {
 		noteService.removeNote(noteId, isPinned).then(this.loadNotes);
 	};
-	
+
 	onCloneNote = (noteId, isPinned) => {
 		noteService.cloneNote(noteId, isPinned).then(this.loadNotes);
-	}
+	};
+
+	onChangeBackground = (noteId, isPinned, bgc) => {
+		noteService.changeNoteBgc(noteId, isPinned, bgc).then(this.loadNotes);
+	};
 
 	render() {
 		const { notes, pinnedNotes } = this.state;
@@ -70,12 +74,14 @@ export class KeepApp extends React.Component {
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onUnpinNote}
 						onCloneNote={this.onCloneNote}
+						onChangeBackground={this.onChangeBackground}
 					/>
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onPinNote}
 						onCloneNote={this.onCloneNote}
+						onChangeBackground={this.onChangeBackground}
 					/>
 				</div>
 			</section>

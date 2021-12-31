@@ -1,6 +1,6 @@
 import { NotePreview } from './NotePreview.jsx';
 
-export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote }) {
+export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
 	if (!notes.length) return <React.Fragment></React.Fragment>;
 	return (
 		<section>
@@ -13,6 +13,7 @@ export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote }
 						onDeleteNote={onDeleteNote}
 						onPinHandle={onPinHandle}
 						onCloneNote={onCloneNote}
+                        onChangeBackground={onChangeBackground}
 					/>
 				))}
 			</div>

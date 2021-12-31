@@ -1,12 +1,12 @@
-import { noteService } from '../../services/note.service.js';
+import { ColorInput } from "../ChangeBakcground.jsx";
 
-export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote }) {
+export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
 	const {
 		info: { label, todos },
 	} = note;
 
 	return (
-		<div>
+		<div style={{ backgroundColor: note.style.backgroundColor }}>
 			<h3>{label}</h3>
 			<ul>
 				{todos.map((todo, idx) => {
@@ -17,7 +17,7 @@ export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button>
+				<button onClick={() => <ColorInput note={note} onChangeBackground={onChangeBackground}/>}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>
