@@ -8,7 +8,8 @@ export const noteService = {
     getYoutubeId,
     addPinnedNote,
     removePinnedNote,
-    queryPinned
+    queryPinned,
+    cloneNote
 }
 
 const NOTE_KEY = 'noteDB';
@@ -52,6 +53,7 @@ function addPinnedNote(noteId) {
     let pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
     const noteIdx = notes.findIndex(note => note.id === noteId);
     const pinnedNote = notes.splice(noteIdx, 1);
+    pinnedNote[0].isPinned = true;
     pinnedNotes.unshift(pinnedNote[0]);
     _saveNotesToStorage(notes);
     _saveNotesToStorage(pinnedNotes, PINNED_KEY);
@@ -63,9 +65,22 @@ function removePinnedNote(noteId) {
     let pinnedNotes = _loadNotesFromStorage(PINNED_KEY);
     const pinnedNoteIdx = pinnedNotes.findIndex(note => note.id === noteId);
     const note = pinnedNotes.splice(pinnedNoteIdx, 1);
+    note[0].isPinned = false;
     notes.unshift(note[0]);
     _saveNotesToStorage(notes);
     _saveNotesToStorage(pinnedNotes, PINNED_KEY);
+    return Promise.resolve();
+}
+
+function cloneNote(noteId, isPinned) {
+    let noteList = isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
+    let noteToDup = noteList.filter(note => {
+        if(note.id === noteId) return JSON.parse(JSON.stringify(note));
+    });
+    noteToDup[0].id = utilService.makeId();
+    noteList.unshift(noteToDup[0]);
+    if(isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    else _saveNotesToStorage(noteList);
     return Promise.resolve();
 }
 
@@ -91,6 +106,7 @@ function _createNote(noteToSave) {
     return {
         id: utilService.makeId(),
         type: "note-txt",
+        isPinned: false,
         info: noteToSave
     }
 }
@@ -119,6 +135,7 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: false,
             info: {
                 txt: "Fullstack Me Baby!"
             },
@@ -129,6 +146,7 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: false,
             info: {
                 txt: "another note attempt"
             },
@@ -139,6 +157,7 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: false,
             info: {
                 txt: "Note test test test tes"
             },
@@ -149,6 +168,7 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-img",
+            isPinned: false,
             info: {
                 url: "assets/img/fox.jpg",
                 title: "Bobi and I"
@@ -172,6 +192,7 @@ function _getNotes() {
         {
             id: utilService.makeId(),
             type: "note-todos",
+            isPinned: false,
             info: {
                 label: "Get my stuff together",
                 todos: [
@@ -193,6 +214,7 @@ function _getPinnedNotes() {
         {
             id: utilService.makeId(),
             type: "note-txt",
+            isPinned: true,
             info: {
                 txt: "Important note"
             },

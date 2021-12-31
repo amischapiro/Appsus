@@ -49,6 +49,10 @@ export class KeepApp extends React.Component {
 	onDeleteNote = (noteId) => {
 		noteService.removeNote(noteId).then(this.loadNotes);
 	};
+	
+	onCloneNote = (noteId, isPinned) => {
+		noteService.cloneNote(noteId, isPinned).then(this.loadNotes);
+	}
 
 	render() {
 		const { notes, pinnedNotes } = this.state;
@@ -65,12 +69,14 @@ export class KeepApp extends React.Component {
 						notes={pinnedNotes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onUnpinNote}
+						onCloneNote={this.onCloneNote}
 					/>
 					<h3>OTHERS</h3>
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onPinNote}
+						onCloneNote={this.onCloneNote}
 					/>
 				</div>
 			</section>
