@@ -74,11 +74,11 @@ function removePinnedNote(noteId) {
 
 function cloneNote(noteId, isPinned) {
     let noteList = isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
-    let noteToDup = noteList.filter(note => {
-        if(note.id === noteId) return JSON.parse(JSON.stringify(note));
-    });
-    noteToDup[0].id = utilService.makeId();
-    noteList.unshift(noteToDup[0]);
+    //use find
+    let noteToDup = noteList.find(note => note.id === noteId);
+    const dupedNote = {...noteToDup};
+    dupedNote.id = utilService.makeId();
+    noteList.unshift(dupedNote);
     if(isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
     return Promise.resolve();
@@ -120,6 +120,7 @@ function _saveNotesToStorage(notes, key = NOTE_KEY) {
 }
 
 function _loadNotesFromStorage(key = NOTE_KEY) {
+    // use same array and filter pinned
     return storageService.loadFromStorage(key);
 }
 
