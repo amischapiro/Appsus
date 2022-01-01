@@ -5,7 +5,7 @@ export function NoteImg({
 	onDeleteNote,
 	onPinHandle,
 	onCloneNote,
-	onToggleColorModal,
+	onOpenColorModal,
 }) {
 	const {
 		info: { url, title },
@@ -19,7 +19,7 @@ export function NoteImg({
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button onClick={() => onToggleColorModal()}>
+				<button onClick={() => onOpenColorModal()}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>

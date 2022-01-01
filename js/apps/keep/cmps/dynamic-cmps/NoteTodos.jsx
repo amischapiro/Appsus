@@ -1,6 +1,6 @@
 import { ColorInput } from "../ChangeBakcground.jsx";
 
-export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
+export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onOpenColorModal }) {
 	const {
 		info: { label, todos },
 	} = note;
@@ -18,7 +18,7 @@ export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onTogg
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button onClick={() => onToggleColorModal()}>
+				<button onClick={() => onOpenColorModal()}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>

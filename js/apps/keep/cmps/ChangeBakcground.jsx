@@ -1,4 +1,4 @@
-export function ColorInput({ note, onToggleColorModal }) {
+export function ColorInput({ note, onCloseColorModal }) {
 	const colors = [
 		'#fff',
 		'#f28b82',
@@ -19,8 +19,7 @@ export function ColorInput({ note, onToggleColorModal }) {
 				return (
 					<div
 						onClick={() =>
-							// this.props.onChangeBackground(note.id, note.isPinned, color)
-							onToggleColorModal()
+							onCloseColorModal()
 						}
 						style={{ backgroundColor: color }}
 						key={color}
