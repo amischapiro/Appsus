@@ -14,7 +14,7 @@ export class KeepApp extends React.Component {
 		filterBy: null,
 		pinnedNotes: null,
 		isEditShown: false,
-		isColorEditShown: false
+		isColorEditShown: false,
 	};
 
 	componentDidMount() {
@@ -74,12 +74,13 @@ export class KeepApp extends React.Component {
 			...prevState,
 			isColorEditShown: !this.state.isColorEditShown,
 		}));
+		console.log(this.state.isColorEditShown);
 	};
 
 	render() {
 		const { notes, pinnedNotes, isColorEditShown } = this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
-		
+
 		return (
 			<section className="keep-app">
 				<div className="filter-display">
@@ -97,9 +98,16 @@ export class KeepApp extends React.Component {
 					{/* {isEditShown && (
 						<EditNote onToggleEditModal={this.onToggleEditModal} />
 					)} */}
-					{isColorEditShown && (
-						<ColorInput notes={notes} onToggleColorModal={this.onToggleColorModal} />
-					)}
+					{/* {isColorEditShown && (
+						<ColorInput
+							notes={notes}
+							onToggleColorModal={this.onToggleColorModal}
+						/>
+					)} */}
+					<ColorInput
+						notes={notes}
+						onToggleColorModal={this.onToggleColorModal}
+					/>
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}

@@ -9,7 +9,7 @@ class _AppHeader extends React.Component {
 			<header className="app-header">
 				<div className="header-container flex justify-space-between">
 					<h1 onClick={() => this.props.history.push('/')}>
-						<img src="../assets/img/logo.png" alt="" />
+						<img src="assets/img/logo.png" alt="" />
 					</h1>
 					<nav className="app-nav">
 						<ul className="clean-list flex">

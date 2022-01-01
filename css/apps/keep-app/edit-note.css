@@ -7,7 +7,12 @@
 
 
 .color-input {
-	position: absolute;
+	position: fixed;
 	top: 20%;
     background-color: #fff;
+}
+
+.color-value {
+    width: 16px;
+    height: 16px;
 }
