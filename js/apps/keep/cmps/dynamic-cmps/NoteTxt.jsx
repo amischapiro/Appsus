@@ -1,9 +1,18 @@
 import { ColorInput } from "../ChangeBakcground.jsx";
+import { emailService } from "../../../mail/services/email.service.js";
 
 export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
 	const {
 		info: { txt },
 	} = note;
+
+	function noteEmail(){
+		const note = {body:txt,subject: 'note', to:'me@gmail.com'}
+		emailService.sendEmail(note)
+
+	}
+
+
 	return (
 		<div style={{ backgroundColor: note.style.backgroundColor }}>
 			{/* <input type="text" value={txt} /> */}
@@ -15,7 +24,7 @@ export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onToggle
 				<button onClick={() => onToggleColorModal()}>
 					<i className="fas fa-palette"></i>
 				</button>
-				<button>
+				<button onClick={noteEmail}>
 					<i className="far fa-envelope"></i>
 				</button>
 				<button onClick={() => onDeleteNote(note.id, note.isPinned)}>

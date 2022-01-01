@@ -5,6 +5,7 @@ export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onTogg
 		info: { label, todos },
 	} = note;
 
+
 	return (
 		<div style={{ backgroundColor: note.style.backgroundColor }}>
 			<h3>{label}</h3>

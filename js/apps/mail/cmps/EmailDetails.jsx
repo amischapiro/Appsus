@@ -2,6 +2,7 @@ import { emailService } from "../services/email.service.js"
 import { Loader } from "../../../cmps/Loader.jsx"
 import { eventBusService } from "../../../services/event-bus.service.js"
 import { utilService } from "../../../services/util.service.js"
+import { noteService } from "../../keep/services/note.service.js"
 export class EmailDetails extends React.Component{
     state={
         email:null
@@ -37,14 +38,13 @@ export class EmailDetails extends React.Component{
         // this.props.loadEmails()
     }
 
+    onEmailNote = ()=>{
+        const note = this.state.email.body
+        noteService.saveNote(note)
+    }
+
    
     
-    // getDate = () =>{
-    //     const date =  utilService.getFormattedDate(this.state.email.sentAt)
-    //     console.log('date:', date);
-        
-    //     return date
-    // }
 
 
 
@@ -61,6 +61,7 @@ export class EmailDetails extends React.Component{
             <h5>{email.body}</h5>
             <button className="primary-btn" onClick={this.onGoBack}>Go back</button>
             <button className="primary-btn" onClick={this.onRemoveEmail} >Delete⛔</button>
+            <button className="primary-btn" onClick={this.onEmailNote}>Create a note</button>
 
         </section>
     }

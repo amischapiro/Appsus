@@ -236,7 +236,6 @@ function _createEmails() {
     let emails = _loadEmailsFromStorage()
     if (!emails || !emails.length) {
         emails = gDefaultEmails
-        console.log('emails:', emails);
 
     }
     _saveEmailsToStorage(emails)

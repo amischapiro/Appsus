@@ -79,6 +79,7 @@ export class KeepApp extends React.Component {
 	render() {
 		const { notes, pinnedNotes, isColorEditShown } = this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
+		
 		return (
 			<section className="keep-app">
 				<div className="filter-display">

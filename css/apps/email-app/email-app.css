@@ -61,6 +61,7 @@
 }
 
 .email-ctgs{
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background-color: rgb(223, 255, 223);
 }
