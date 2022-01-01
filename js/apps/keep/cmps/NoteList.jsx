@@ -10,7 +10,7 @@ export function NoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onChan
 		);
 	return (
 		<section>
-			<div className="notes-list flex wrap">
+			<div className="notes-list">
 				{notes.map((note) => (
 					<NotePreview
 						key={note.id}

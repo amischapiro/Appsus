@@ -39,8 +39,8 @@ function removeNote(noteId, isPinned = false) {
     return Promise.resolve();
 }
 
-function saveNote(noteToSave) {
-    return noteToSave.id ? _updateNote(noteToSave) : _addNote(noteToSave);
+function saveNote(noteToSave, noteType) {
+    return noteToSave.id ? _updateNote(noteToSave, noteType) : _addNote(noteToSave, noteType);
 }
 
 function getYoutubeId(url) {
@@ -105,24 +105,68 @@ function _getFilteredNotes(notes, filterBy) {
 
 }
 
-function _addNote(noteToSave) {
+function _addNote(noteToSave, noteType) {
     let notes = _loadNotesFromStorage();
-    var note = _createNote(noteToSave);
+    var note = _createNote(noteToSave, noteType);
     notes = [note, ...notes];
     _saveNotesToStorage(notes);
     return Promise.resolve();
 }
 
-function _createNote(noteToSave) {
-    return {
-        id: utilService.makeId(),
-        type: "note-txt",
-        isPinned: false,
-        info: noteToSave,
-        style: {
-            backgroundColor: "#fff"
+function _createNote(noteToSave, noteType = 'txt') {
+    var note = '';
+    if (noteType === 'txt') {
+        note = {
+            id: utilService.makeId(),
+            type: "note-txt",
+            isPinned: false,
+            info: {
+                txt: noteToSave
+            },
+            style: {
+                backgroundColor: "#fff"
+            }
+        }
+    } else if (noteType === 'img') {
+        note = {
+            id: utilService.makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                url: noteToSave,
+                title: ''
+            },
+            style: {
+                backgroundColor: "#fff"
+            }
+        }
+    } else {
+        note = {
+            id: utilService.makeId(),
+            type: "note-todos",
+            isPinned: false,
+            info: _getListFromString(noteToSave),
+            style: {
+                backgroundColor: "#fff"
+            }
         }
     }
+    return note;
+}
+
+function _getListFromString(list) {
+    let info = {
+        label: '',
+        todos: []
+    }
+    let listArr = list.split(',');
+    const noteLabel = listArr.splice(0, 1);
+    const noteTodos = listArr.map(item => {
+        return { txt: item, doneAt: null };
+    })
+    info.label = noteLabel;
+    info.todos = noteTodos;
+    return info;
 }
 
 function _updateNote(noteToSave) {

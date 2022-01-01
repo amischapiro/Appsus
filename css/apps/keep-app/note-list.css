@@ -14,3 +14,17 @@
 .color-input {
     position: absolute;
 }
+
+.notes-list {
+    width: 100%;
+    column-count: 4;
+    column-gap: 1rem;
+    column-width: 16.5rem;
+    margin-bottom: 2rem;
+}
+
+.notes-list>* {
+    margin-bottom: 1rem;
+    break-inside: avoid-column;
+    page-break-inside: avoid;
+}

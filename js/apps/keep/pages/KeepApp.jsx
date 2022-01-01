@@ -4,6 +4,7 @@ import { PinnedNoteList } from '../cmps/PinnedNoteList.jsx';
 import { noteService } from '../services/note.service.js';
 import { CreateNote } from '../cmps/CreateNote.jsx';
 import { FilterNote } from '../cmps/FilterNote.jsx';
+import { EditNote } from '../cmps/EditNote.jsx';
 const { link } = ReactRouterDOM;
 
 export class KeepApp extends React.Component {
@@ -11,6 +12,7 @@ export class KeepApp extends React.Component {
 		notes: null,
 		filterBy: null,
 		pinnedNotes: null,
+		isEditShown: false,
 	};
 
 	componentDidMount() {
@@ -31,8 +33,8 @@ export class KeepApp extends React.Component {
 			);
 	};
 
-	onCreateNote = (txt) => {
-		noteService.saveNote(txt).then(this.loadNotes);
+	onCreateNote = (txt, noteType) => {
+		noteService.saveNote(txt, noteType).then(this.loadNotes);
 	};
 
 	onSetFilter = (filterBy) => {
@@ -59,6 +61,13 @@ export class KeepApp extends React.Component {
 		noteService.changeNoteBgc(noteId, isPinned, bgc).then(this.loadNotes);
 	};
 
+	// onToggleEditModal = () => {
+	// 	this.setState((prevState) => ({
+	// 		...prevState,
+	// 		isEditShown: !this.state.isEditShown,
+	// 	}));
+	// };
+
 	render() {
 		const { notes, pinnedNotes } = this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
@@ -76,6 +85,15 @@ export class KeepApp extends React.Component {
 						onCloneNote={this.onCloneNote}
 						onChangeBackground={this.onChangeBackground}
 					/>
+					{/* {isEditShown && (
+						<EditNote onToggleEditModal={this.onToggleEditModal} />
+					)} */}
+					{/* {isComposeShown && (
+						<ComposeEmail
+							onToggleComposeModal={this.onToggleComposeModal}
+							loadEmails={this.props.loadEmails}
+						/>
+					)} */}
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}
