@@ -30,11 +30,11 @@ export class EmailCtgs extends React.Component {
 
     render() {
         const { isComposeShown } = this.state
+        const {ctg} = this.state.filterBy
 
 
         return <section className="email-ctgs">
             <div className={`main-screen` + (isComposeShown ? ' gray-screen' : '')} ></div>
-            {/* <button onClick={this.onToggleComposeModal} className="compose-btn">Compose</button> */}
             <div onClick={this.onToggleComposeModal} className="ctg compose-btn">
             <i className="fas fa-plus-circle"></i>
             <p>Compose</p>
@@ -44,19 +44,19 @@ export class EmailCtgs extends React.Component {
             )}
             <div className={`ctg ${this.state.filterBy.ctg === 'all' ? 'active-ctg' : ''} `} onClick={() => this.onChangeCtg('all')} >
                 <i className="fas fa-envelope-square"></i>
-                <p>All Mail</p>
+                <p>All Mail {ctg==='all'&&`(${this.props.unread} unread)`}</p>
             </div>
             <div className={`ctg ${this.state.filterBy.ctg === 'inbox' ? 'active-ctg' : ''}`} onClick={() => this.onChangeCtg('inbox')}>
                 <i className="fas fa-inbox"></i>
-                <p >Inbox ({this.props.unread} unread)</p>
+                <p >Inbox {ctg==='inbox'&&`(${this.props.unread} unread)`} </p>
             </div>
             <div className={`ctg ${this.state.filterBy.ctg === 'sent' ? 'active-ctg' : ''}`} onClick={() => this.onChangeCtg('sent')}>
             <i className="fa fa-paper-plane"></i>
-            <p>Sent</p>
+            <p>Sent {ctg==='sent'&&`(${this.props.unread} unread)`}</p>
             </div>
             <div className={`ctg ${this.state.filterBy.ctg === 'starred' ? 'active-ctg' : ''}`} onClick={() => this.onChangeCtg('starred')}>
             <i className="far fa-star"></i>
-            <p>Starred</p>
+            <p>Starred {ctg==='starred'&&`(${this.props.unread} unread)`}</p>
             </div>
         </section>
     }

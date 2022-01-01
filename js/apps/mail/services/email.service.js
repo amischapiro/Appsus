@@ -6,7 +6,7 @@ const gDefaultEmails = [
     {
         id: utilService.makeId(),
         subject: 'we want you!',
-        body: utilService.makeLorem(50),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
         from: 'hackeru@gmail.com',
@@ -15,7 +15,7 @@ const gDefaultEmails = [
     {
         id: utilService.makeId(),
         subject: 'save us!',
-        body: utilService.makeLorem(50),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
         from: 'timcook@apple.com',
@@ -24,7 +24,7 @@ const gDefaultEmails = [
     {
         id: utilService.makeId(),
         subject: 'best student',
-        body: utilService.makeLorem(50),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
         from: 'codingacademy@ca.com',
@@ -33,7 +33,7 @@ const gDefaultEmails = [
     {
         id: utilService.makeId(),
         subject: 'come to us!',
-        body: utilService.makeLorem(50),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
         from: 'jeffbezos@amazon.com',
@@ -42,7 +42,7 @@ const gDefaultEmails = [
     {
         id: utilService.makeId(),
         subject: 'new tesla',
-        body: utilService.makeLorem(50),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
         from: 'elonmusk@tesla.com',
@@ -50,11 +50,101 @@ const gDefaultEmails = [
     },
     {
         id: utilService.makeId(),
+        subject: 'where are all of your friends?',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'omeradam@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
         subject: 'we give up',
-        body: utilService.makeLorem(50),
+        body: utilService.makeLorem(200),
         isRead: false,
         sentAt: Date.now(),
         from: 'johnbryce@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'we give up',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'johnbryce@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'our offer',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'netcraft@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'where is you english from?',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'jerusalempost@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'calling you',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'eyal golan@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'hello its me',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'adele@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'oops i did it again',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'britneyspears@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'im gonna build a wall',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'donaldtrump@me.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'vote for me!',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'kanyewest2020@gmail.com',
+        isStarred:false
+    },
+    {
+        id: utilService.makeId(),
+        subject: '24 ice cream flavours!',
+        body: utilService.makeLorem(200),
+        isRead: false,
+        sentAt: Date.now(),
+        from: 'hitecs@gmail.com',
         isStarred:false
     }
 
@@ -171,12 +261,14 @@ function sendEmail(email) {
 
 }
 
-function emailRead(emailId) {
+function emailRead(emailId,readState) {
+    
     const emails = _loadEmailsFromStorage()
     const readIdx = emails.findIndex(email=>{
         return email.id ===emailId
     })
-    emails[readIdx].isRead = true
+    if(readState=== undefined) readState = true
+    emails[readIdx].isRead = readState
     _saveEmailsToStorage(emails)
     return Promise.resolve()
 }

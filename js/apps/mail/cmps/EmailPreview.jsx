@@ -6,12 +6,14 @@ const { Link } = ReactRouterDOM
 export class EmailPreview extends React.Component{
    state={
        isLongTxt:false,
-       isStarred:false
+       isStarred:false,
+       isRead:null
 
 
    }
    componentDidMount() {
        this.setState((prevState)=>({...prevState,isStarred:this.props.email.isStarred}))
+       this.setState((prevState)=>({...prevState,isRead:this.props.email.isRead}))
    }
     onToggleTxt = () => {
         this.setState((prevState) => ({ ...prevState, isLongTxt: !this.state.isLongTxt }));
@@ -26,6 +28,15 @@ export class EmailPreview extends React.Component{
             this.props.loadEmails()
         }, 10);
       }
+
+      onToggleRead = (ev)=>{
+          ev.stopPropagation()
+        this.setState((prevState) => ({...prevState,isRead:!this.state.isRead}),()=>
+        emailService.emailRead(this.props.email.id,this.state.isRead))
+        setTimeout(() => {
+            this.props.loadEmails()
+        }, 10);
+      }
     
    render(){
     const email = this.props.email
@@ -33,7 +44,7 @@ export class EmailPreview extends React.Component{
     return (
         
         <article className={`email-preview ${email.isRead ?'':'unread-bgc' } ${isLongTxt ? 'full-preview':''}`} onClick={this.onToggleTxt}>
-            <i className={email.isRead ? "far fa-envelope-open":"fas fa-envelope"} ></i> 
+            <i className={email.isRead ? "far fa-envelope-open":"fas fa-envelope"} onClick={this.onToggleRead} ></i> 
             <p className={`star ${isStarred?'filled':''}`} onClick={this.onToggleStar}>⭐</p>
             <p className="preview-subject">{email.subject}</p> 
             {email.from && <p className="to-from">From:"{email.from}"</p>}

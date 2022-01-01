@@ -2,7 +2,8 @@ export const utilService = {
     makeId,
     makeLorem,
     getRandomIntInclusive,
-    getFormattedDate
+    getFormattedDate,
+    getFormattedTime
 }
 
 function makeId(length = 6) {
@@ -32,10 +33,19 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
 
-function getFormattedDate(date = new Date()) {
+function getFormattedDate(date = new Date()) {    
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const yyyy = date.getFullYear();
 
     return (dd + '/' + mm + '/' + yyyy);
+}
+
+function getFormattedTime(timestamp){
+    let date = new Date(timestamp * 1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    let seconds = "0" + date.getSeconds();
+    const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime
 }

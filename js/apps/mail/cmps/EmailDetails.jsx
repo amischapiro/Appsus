@@ -1,6 +1,7 @@
 import { emailService } from "../services/email.service.js"
 import { Loader } from "../../../cmps/Loader.jsx"
 import { eventBusService } from "../../../services/event-bus.service.js"
+import { utilService } from "../../../services/util.service.js"
 export class EmailDetails extends React.Component{
     state={
         email:null
@@ -38,7 +39,12 @@ export class EmailDetails extends React.Component{
 
    
     
-
+    // getDate = () =>{
+    //     const date =  utilService.getFormattedDate(this.state.email.sentAt)
+    //     console.log('date:', date);
+        
+    //     return date
+    // }
 
 
 
@@ -48,9 +54,10 @@ export class EmailDetails extends React.Component{
         if(!email) return <Loader/>
 
         return <section className="email-details">
-            <small>Sent at{email.sentAt}</small>
+            <small>Sent at {utilService.getFormattedTime(email.sentAt)}</small>
             <h1>{email.subject}</h1>
             <p>{email.to}</p>
+            <p>{email.from}</p>
             <h5>{email.body}</h5>
             <button className="primary-btn" onClick={this.onGoBack}>Go back</button>
             <button className="primary-btn" onClick={this.onRemoveEmail} >Delete⛔</button>

@@ -12,4 +12,5 @@
 @import './cmps/user-msg.css';
 @import './apps/keep-app/add-note.css';
 @import './apps/keep-app/note-filter.css';
-@import './apps/keep-app/keep-app.css'
+@import './apps/keep-app/keep-app.css';
+@import './apps/email-app/email-details.css';
