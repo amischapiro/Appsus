@@ -1,8 +1,18 @@
 .welcome-hero{
+    margin: 0;
     height:9rem;
     width: 100vw;
+    height: 100vh;
+    background-image: url(../../assets/img/bgc.jpg);
+    background-size: contain;
+    background-size: cover;
+    text-align: center;
 }
 
+
 .welcome-hero h1 {
+    padding: 2rem;
     font-size: 3rem;
+    margin: 0;
 }
+

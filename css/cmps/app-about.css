@@ -1,0 +1,22 @@
+.app-about{
+   /* background-image: url(); */
+}
+.app-about h1{
+    padding-left: 2rem;
+    font-size: 26px;
+}
+.names{
+    padding-left: 3rem;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.app-about h3{
+    padding-left: 2rem;
+    font-size: 20px;
+}
+.names-p{
+    padding-left: 3rem;
+}
+.app-about h3:not(:first-of-type){
+    margin-top: 3rem;
+}

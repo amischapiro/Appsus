@@ -49,12 +49,6 @@ export class EmailApp extends React.Component {
         const { emails, filterBy, unread, sortBy } = this.state
         if (!emails) return <Loader/>
         return (
-            // <section className="email-app">
-            //     <div><EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} /></div>
-            //     <div className="email-list-container"><EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} sortBy={sortBy} onSetSort={this.onSetSort} />
-            //     <EmailList emails={emails} loadEmails={this.loadEmails}/></div>
-            // </section>
-
             <section className="email-app">
                 <aside>
                 <EmailCtgs filterBy={filterBy} onSetFilter={this.onSetFilter} loadEmails={this.loadEmails} unread={unread} />
@@ -62,7 +56,11 @@ export class EmailApp extends React.Component {
                 <main>
                     <EmailFilter filterBy={filterBy} onSetFilter={this.onSetFilter} sortBy={sortBy} onSetSort={this.onSetSort} />
                     <Switch className="email-list-container">
-                        <Route component={EmailDetails} path="/email/:emailId" /> 
+                        <Route component={(props) => <EmailDetails {...props} loadEmails={this.loadEmails} />} path ="/email/:emailId"/>
+
+                        <Route path="/email/:emailId" >
+                            <EmailDetails loadEmails={this.loadEmails} />
+                            </Route>
                         <Route  path="/email"  > 
                         <EmailList emails={emails} loadEmails={this.loadEmails}/>
                         </Route>

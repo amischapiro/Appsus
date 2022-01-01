@@ -3,6 +3,7 @@ import { Loader } from "../../../cmps/Loader.jsx"
 import { eventBusService } from "../../../services/event-bus.service.js"
 import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../../keep/services/note.service.js"
+import { EmailList } from "./EmailList.jsx"
 export class EmailDetails extends React.Component{
     state={
         email:null
@@ -16,15 +17,17 @@ export class EmailDetails extends React.Component{
     
 
     loadEmail = () => {
+        console.log('this.props:', this.props);
+        
         const { emailId } = this.props.match.params 
         emailService.getEmailById(emailId).then(email => {
             if (!email) return this.props.history.push('/email')
             this.setState({ email },()=>emailService.emailRead(emailId))
         })
-        // this.props.loadEmails()
     }
 
     onGoBack = () => {
+        this.props.loadEmails()
         this.props.history.push('/email')
     }
 
@@ -35,7 +38,6 @@ export class EmailDetails extends React.Component{
             this.onGoBack()
             
         })
-        // this.props.loadEmails()
     }
 
     onEmailNote = ()=>{
