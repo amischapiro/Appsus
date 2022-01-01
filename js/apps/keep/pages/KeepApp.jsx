@@ -1,8 +1,11 @@
 import { Loader } from '../../../cmps/Loader.jsx';
 import { NoteList } from '../cmps/NoteList.jsx';
+import { PinnedNoteList } from '../cmps/PinnedNoteList.jsx';
 import { noteService } from '../services/note.service.js';
 import { CreateNote } from '../cmps/CreateNote.jsx';
 import { FilterNote } from '../cmps/FilterNote.jsx';
+import { EditNote } from '../cmps/EditNote.jsx';
+import { ColorInput } from '../cmps/ChangeBakcground.jsx';
 const { link } = ReactRouterDOM;
 
 export class KeepApp extends React.Component {
@@ -10,6 +13,8 @@ export class KeepApp extends React.Component {
 		notes: null,
 		filterBy: null,
 		pinnedNotes: null,
+		isEditShown: false,
+		isColorEditShown: false
 	};
 
 	componentDidMount() {
@@ -30,8 +35,8 @@ export class KeepApp extends React.Component {
 			);
 	};
 
-	onCreateNote = (txt) => {
-		noteService.saveNote(txt).then(this.loadNotes);
+	onCreateNote = (txt, noteType) => {
+		noteService.saveNote(txt, noteType).then(this.loadNotes);
 	};
 
 	onSetFilter = (filterBy) => {
@@ -46,16 +51,33 @@ export class KeepApp extends React.Component {
 		noteService.removePinnedNote(noteId).then(this.loadNotes);
 	};
 
-	onDeleteNote = (noteId) => {
-		noteService.removeNote(noteId).then(this.loadNotes);
+	onDeleteNote = (noteId, isPinned) => {
+		noteService.removeNote(noteId, isPinned).then(this.loadNotes);
 	};
-	
+
 	onCloneNote = (noteId, isPinned) => {
 		noteService.cloneNote(noteId, isPinned).then(this.loadNotes);
-	}
+	};
+
+	onChangeBackground = (noteId, isPinned, bgc) => {
+		noteService.changeNoteBgc(noteId, isPinned, bgc).then(this.loadNotes);
+	};
+
+	// onToggleEditModal = () => {
+	// 	this.setState((prevState) => ({
+	// 		...prevState,
+	// 		isEditShown: !this.state.isEditShown,
+	// 	}));
+	// };
+	onToggleColorModal = () => {
+		this.setState((prevState) => ({
+			...prevState,
+			isColorEditShown: !this.state.isColorEditShown,
+		}));
+	};
 
 	render() {
-		const { notes, pinnedNotes } = this.state;
+		const { notes, pinnedNotes, isColorEditShown } = this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
 		return (
 			<section className="keep-app">
@@ -64,19 +86,25 @@ export class KeepApp extends React.Component {
 				</div>
 				<div className="note-display-edit">
 					<CreateNote onCreateNote={this.onCreateNote} />
-					<h3>PINNED</h3>
-					<NoteList
+					<PinnedNoteList
 						notes={pinnedNotes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onUnpinNote}
 						onCloneNote={this.onCloneNote}
+						onToggleColorModal={this.onToggleColorModal}
 					/>
-					<h3>OTHERS</h3>
+					{/* {isEditShown && (
+						<EditNote onToggleEditModal={this.onToggleEditModal} />
+					)} */}
+					{isColorEditShown && (
+						<ColorInput notes={notes} onToggleColorModal={this.onToggleColorModal} />
+					)}
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onPinNote}
 						onCloneNote={this.onCloneNote}
+						onToggleColorModal={this.onToggleColorModal}
 					/>
 				</div>
 			</section>

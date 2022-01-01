@@ -9,7 +9,8 @@ export const noteService = {
     addPinnedNote,
     removePinnedNote,
     queryPinned,
-    cloneNote
+    cloneNote,
+    changeNoteBgc
 }
 
 const NOTE_KEY = 'noteDB';
@@ -30,15 +31,16 @@ function queryPinned(filterBy = null) {
     return Promise.resolve(filteredNotes);
 }
 
-function removeNote(noteId) {
-    let notes = _loadNotesFromStorage();
+function removeNote(noteId, isPinned = false) {
+    let notes = !isPinned ? _loadNotesFromStorage() : _loadNotesFromStorage(PINNED_KEY);
     notes = notes.filter(note => note.id !== noteId);
-    _saveNotesToStorage(notes);
+    if (!isPinned) _saveNotesToStorage(notes);
+    else _saveNotesToStorage(notes, PINNED_KEY);
     return Promise.resolve();
 }
 
-function saveNote(noteToSave) {
-    return noteToSave.id ? _updateNote(noteToSave) : _addNote(noteToSave);
+function saveNote(noteToSave, noteType) {
+    return noteToSave.id ? _updateNote(noteToSave, noteType) : _addNote(noteToSave, noteType);
 }
 
 function getYoutubeId(url) {
@@ -76,10 +78,19 @@ function cloneNote(noteId, isPinned) {
     let noteList = isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
     //use find
     let noteToDup = noteList.find(note => note.id === noteId);
-    const dupedNote = {...noteToDup};
+    const dupedNote = { ...noteToDup };
     dupedNote.id = utilService.makeId();
     noteList.unshift(dupedNote);
-    if(isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    if (isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    else _saveNotesToStorage(noteList);
+    return Promise.resolve();
+}
+
+function changeNoteBgc(noteId, isPinned, bgc) {
+    let noteList = isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
+    const noteIdx = noteList.findIndex(note => note.id === noteId);
+    noteList[noteIdx].style.backgroundColor = bgc;
+    if (isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
     return Promise.resolve();
 }
@@ -94,21 +105,68 @@ function _getFilteredNotes(notes, filterBy) {
 
 }
 
-function _addNote(noteToSave) {
+function _addNote(noteToSave, noteType) {
     let notes = _loadNotesFromStorage();
-    var note = _createNote(noteToSave);
+    var note = _createNote(noteToSave, noteType);
     notes = [note, ...notes];
     _saveNotesToStorage(notes);
     return Promise.resolve();
 }
 
-function _createNote(noteToSave) {
-    return {
-        id: utilService.makeId(),
-        type: "note-txt",
-        isPinned: false,
-        info: noteToSave
+function _createNote(noteToSave, noteType = 'txt') {
+    var note = '';
+    if (noteType === 'txt') {
+        note = {
+            id: utilService.makeId(),
+            type: "note-txt",
+            isPinned: false,
+            info: {
+                txt: noteToSave
+            },
+            style: {
+                backgroundColor: "#fff"
+            }
+        }
+    } else if (noteType === 'img') {
+        note = {
+            id: utilService.makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                url: noteToSave,
+                title: ''
+            },
+            style: {
+                backgroundColor: "#fff"
+            }
+        }
+    } else {
+        note = {
+            id: utilService.makeId(),
+            type: "note-todos",
+            isPinned: false,
+            info: _getListFromString(noteToSave),
+            style: {
+                backgroundColor: "#fff"
+            }
+        }
     }
+    return note;
+}
+
+function _getListFromString(list) {
+    let info = {
+        label: '',
+        todos: []
+    }
+    let listArr = list.split(',');
+    const noteLabel = listArr.splice(0, 1);
+    const noteTodos = listArr.map(item => {
+        return { txt: item, doneAt: null };
+    })
+    info.label = noteLabel;
+    info.todos = noteTodos;
+    return info;
 }
 
 function _updateNote(noteToSave) {

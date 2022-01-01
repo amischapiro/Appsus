@@ -1,16 +1,11 @@
 import { NotePreview } from './NotePreview.jsx';
 
-export function NoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
-	if (!notes.length)
-		return (
-			<div className="no-notes">
-				<img></img>
-				<h1>Notes you add appear here</h1>
-			</div>
-		);
+export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
+	if (!notes.length) return <React.Fragment></React.Fragment>;
 	return (
 		<section>
-			<div className="notes-list">
+			<h3>PINNED</h3>
+			<div className="notes-list flex wrap">
 				{notes.map((note) => (
 					<NotePreview
 						key={note.id}
@@ -22,6 +17,7 @@ export function NoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onTogg
 					/>
 				))}
 			</div>
+            <h3>OTHERS</h3>
 		</section>
 	);
 }

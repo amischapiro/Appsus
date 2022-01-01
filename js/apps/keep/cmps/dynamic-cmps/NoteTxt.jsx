@@ -1,24 +1,24 @@
-// import { noteService } from '../../services/note.service.js';
+import { ColorInput } from "../ChangeBakcground.jsx";
 
-export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote }) {
+export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
 	const {
 		info: { txt },
 	} = note;
 	return (
-		<div>
+		<div style={{ backgroundColor: note.style.backgroundColor }}>
 			{/* <input type="text" value={txt} /> */}
 			<p>{txt}</p>
 			<div className="note-actions">
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button>
+				<button onClick={() => onToggleColorModal()}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>
 					<i className="far fa-envelope"></i>
 				</button>
-				<button onClick={() => onDeleteNote(note.id)}>
+				<button onClick={() => onDeleteNote(note.id, note.isPinned)}>
 					<i className="far fa-trash-alt"></i>
 				</button>
 				<button onClick={() => onCloneNote(note.id, note.isPinned)}>

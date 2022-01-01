@@ -1,6 +1,9 @@
 const { NavLink, withRouter } = ReactRouterDOM;
 
 class _AppHeader extends React.Component {
+	state = {
+		currPage: 'Home'
+	}
 	render() {
 		return (
 			<header className="app-header">
@@ -13,7 +16,7 @@ class _AppHeader extends React.Component {
 							<li>
 								<NavLink
 									className="clean-link"
-									activeClassName="my-activ"
+									activeClassName="my-active"
 									exact
 									to="/">
 									Home

@@ -1,11 +1,17 @@
-import { noteService } from '../../services/note.service.js';
+import { ColorInput } from '../ChangeBakcground.jsx';
 
-export function NoteImg({ note, onDeleteNote, onPinHandle, onCloneNote }) {
+export function NoteImg({
+	note,
+	onDeleteNote,
+	onPinHandle,
+	onCloneNote,
+	onToggleColorModal,
+}) {
 	const {
 		info: { url, title },
 	} = note;
 	return (
-		<div>
+		<div style={{ backgroundColor: note.style.backgroundColor }}>
 			<img src={url} alt="" />
 			{/* <input type="text" value={title} /> */}
 			<h3>{title}</h3>
@@ -13,13 +19,13 @@ export function NoteImg({ note, onDeleteNote, onPinHandle, onCloneNote }) {
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button>
+				<button onClick={() => onToggleColorModal()}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>
 					<i className="far fa-envelope"></i>
 				</button>
-				<button onClick={() => onDeleteNote(note.id)}>
+				<button onClick={() => onDeleteNote(note.id, note.isPinned)}>
 					<i className="far fa-trash-alt"></i>
 				</button>
 				<button onClick={() => onCloneNote(note.id, note.isPinned)}>
