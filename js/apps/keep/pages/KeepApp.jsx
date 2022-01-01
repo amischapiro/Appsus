@@ -69,13 +69,16 @@ export class KeepApp extends React.Component {
 	// 		isEditShown: !this.state.isEditShown,
 	// 	}));
 	// };
-	onToggleColorModal = () => {
+	onOpenColorModal = () => {
 		this.setState((prevState) => ({
 			...prevState,
 			isColorEditShown: !this.state.isColorEditShown,
 		}));
-		console.log(this.state.isColorEditShown);
 	};
+
+	onCloseColorModal = () => {
+		return;
+	}
 
 	render() {
 		const { notes, pinnedNotes, isColorEditShown } = this.state;
@@ -93,27 +96,23 @@ export class KeepApp extends React.Component {
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onUnpinNote}
 						onCloneNote={this.onCloneNote}
-						onToggleColorModal={this.onToggleColorModal}
+						onOpenColorModal={this.onOpenColorModal}
 					/>
 					{/* {isEditShown && (
 						<EditNote onToggleEditModal={this.onToggleEditModal} />
 					)} */}
-					{/* {isColorEditShown && (
+					{isColorEditShown && (
 						<ColorInput
 							notes={notes}
-							onToggleColorModal={this.onToggleColorModal}
+							onCloseColorModal={this.onCloseColorModal}
 						/>
-					)} */}
-					<ColorInput
-						notes={notes}
-						onToggleColorModal={this.onToggleColorModal}
-					/>
+					)}
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onPinNote}
 						onCloneNote={this.onCloneNote}
-						onToggleColorModal={this.onToggleColorModal}
+						onOpenColorModal={this.onOpenColorModal}
 					/>
 				</div>
 			</section>
