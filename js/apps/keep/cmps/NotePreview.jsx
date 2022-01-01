@@ -1,6 +1,6 @@
 import { DynamicCmp } from './dynamic-cmps/DynamicCmp.jsx';
 
-export function NotePreview({ note, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
+export function NotePreview({ note, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
 	return (
 		<article className="note-preview">
 			<DynamicCmp
@@ -9,7 +9,7 @@ export function NotePreview({ note, onDeleteNote, onPinHandle, onCloneNote, onCh
 				onDeleteNote={onDeleteNote}
 				onPinHandle={onPinHandle}
 				onCloneNote={onCloneNote}
-				onChangeBackground={onChangeBackground}
+				onToggleColorModal={onToggleColorModal}
 			/>
 		</article>
 	);

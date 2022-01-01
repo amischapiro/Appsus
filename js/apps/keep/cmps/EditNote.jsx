@@ -1,4 +1,4 @@
-import { Loader } from "../../../cmps/Loader.jsx";
+import { Loader } from '../../../cmps/Loader.jsx';
 
 export class EditNote extends React.Component {
 	state = {
@@ -14,20 +14,18 @@ export class EditNote extends React.Component {
 	};
 
 	onSubmitNote = () => {
-		this.props.onCreateNote(this.state.info);
+		this.props.onEditNote(this.state.note);
 		this.cleanForm();
 	};
 
 	cleanForm = () => {
 		this.setState({
-			info: {
-				txt: '',
-			},
+			note: null,
 		});
 	};
 
 	render() {
-        if (!note) return <Loader />
+		if (!note) return <Loader />;
 		return (
 			<div className="note-editor">
 				<textarea
@@ -35,7 +33,7 @@ export class EditNote extends React.Component {
 					id="simple-txt-edit"
 					cols="50"
 					rows="2"
-                    value={txt}
+					value={txt}
 					onChange={this.handleChange}></textarea>
 				<button onClick={this.onSubmitNote}>Save</button>
 			</div>

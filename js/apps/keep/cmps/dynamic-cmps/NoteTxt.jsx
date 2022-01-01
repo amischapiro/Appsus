@@ -1,6 +1,6 @@
 import { ColorInput } from "../ChangeBakcground.jsx";
 
-export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onChangeBackground }) {
+export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onToggleColorModal }) {
 	const {
 		info: { txt },
 	} = note;
@@ -12,7 +12,7 @@ export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onChange
 				<button onClick={() => onPinHandle(note.id)}>
 					<i className="fas fa-thumbtack"></i>
 				</button>
-				<button onClick={() => <ColorInput note={note} onChangeBackground={onChangeBackground}/>}>
+				<button onClick={() => onToggleColorModal()}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button>

@@ -72,7 +72,7 @@ export class KeepApp extends React.Component {
 	onToggleColorModal = () => {
 		this.setState((prevState) => ({
 			...prevState,
-			isColorEditShown: !this.state.isEditShown,
+			isColorEditShown: !this.state.isColorEditShown,
 		}));
 	};
 
@@ -91,20 +91,20 @@ export class KeepApp extends React.Component {
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onUnpinNote}
 						onCloneNote={this.onCloneNote}
-						onChangeBackground={this.onChangeBackground}
+						onToggleColorModal={this.onToggleColorModal}
 					/>
 					{/* {isEditShown && (
 						<EditNote onToggleEditModal={this.onToggleEditModal} />
 					)} */}
 					{isColorEditShown && (
-						<ColorInput onToggleColorModal={this.onToggleColorModal} />
+						<ColorInput notes={notes} onToggleColorModal={this.onToggleColorModal} />
 					)}
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}
 						onPinHandle={this.onPinNote}
 						onCloneNote={this.onCloneNote}
-						onChangeBackground={this.onChangeBackground}
+						onToggleColorModal={this.onToggleColorModal}
 					/>
 				</div>
 			</section>
