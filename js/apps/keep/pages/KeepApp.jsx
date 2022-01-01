@@ -5,6 +5,7 @@ import { noteService } from '../services/note.service.js';
 import { CreateNote } from '../cmps/CreateNote.jsx';
 import { FilterNote } from '../cmps/FilterNote.jsx';
 import { EditNote } from '../cmps/EditNote.jsx';
+import { ColorInput } from '../cmps/ChangeBakcground.jsx';
 const { link } = ReactRouterDOM;
 
 export class KeepApp extends React.Component {
@@ -13,6 +14,7 @@ export class KeepApp extends React.Component {
 		filterBy: null,
 		pinnedNotes: null,
 		isEditShown: false,
+		isColorEditShown: false
 	};
 
 	componentDidMount() {
@@ -67,9 +69,15 @@ export class KeepApp extends React.Component {
 	// 		isEditShown: !this.state.isEditShown,
 	// 	}));
 	// };
+	onToggleColorModal = () => {
+		this.setState((prevState) => ({
+			...prevState,
+			isColorEditShown: !this.state.isEditShown,
+		}));
+	};
 
 	render() {
-		const { notes, pinnedNotes } = this.state;
+		const { notes, pinnedNotes, isColorEditShown } = this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
 		return (
 			<section className="keep-app">
@@ -88,12 +96,9 @@ export class KeepApp extends React.Component {
 					{/* {isEditShown && (
 						<EditNote onToggleEditModal={this.onToggleEditModal} />
 					)} */}
-					{/* {isComposeShown && (
-						<ComposeEmail
-							onToggleComposeModal={this.onToggleComposeModal}
-							loadEmails={this.props.loadEmails}
-						/>
-					)} */}
+					{isColorEditShown && (
+						<ColorInput onToggleColorModal={this.onToggleColorModal} />
+					)}
 					<NoteList
 						notes={notes}
 						onDeleteNote={this.onDeleteNote}

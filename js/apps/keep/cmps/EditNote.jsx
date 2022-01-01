@@ -1,8 +1,8 @@
+import { Loader } from "../../../cmps/Loader.jsx";
+
 export class EditNote extends React.Component {
 	state = {
-		info: {
-			txt: '',
-		},
+		note: null,
 	};
 
 	handleChange = ({ target }) => {
@@ -27,9 +27,7 @@ export class EditNote extends React.Component {
 	};
 
 	render() {
-        const {
-			info: { txt },
-		} = this.state;
+        if (!note) return <Loader />
 		return (
 			<div className="note-editor">
 				<textarea
