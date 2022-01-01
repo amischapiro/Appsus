@@ -15,6 +15,7 @@ export class KeepApp extends React.Component {
 		pinnedNotes: null,
 		isEditShown: false,
 		isColorEditShown: false,
+		noteColored: null,
 	};
 
 	componentDidMount() {
@@ -61,6 +62,10 @@ export class KeepApp extends React.Component {
 
 	onChangeBackground = (noteId, isPinned, bgc) => {
 		noteService.changeNoteBgc(noteId, isPinned, bgc).then(this.loadNotes);
+		this.setState((prevState) => ({
+			...prevState,
+			isColorEditShown: !this.state.isColorEditShown,
+		}));
 	};
 
 	// onToggleEditModal = () => {
@@ -69,7 +74,9 @@ export class KeepApp extends React.Component {
 	// 		isEditShown: !this.state.isEditShown,
 	// 	}));
 	// };
-	onOpenColorModal = () => {
+	onOpenColorModal = (note) => {
+		console.log(note);
+		this.state.noteColored = note;
 		this.setState((prevState) => ({
 			...prevState,
 			isColorEditShown: !this.state.isColorEditShown,
@@ -77,11 +84,15 @@ export class KeepApp extends React.Component {
 	};
 
 	onCloseColorModal = () => {
-		return;
-	}
+		this.setState((prevState) => ({
+			...prevState,
+			isColorEditShown: !this.state.isColorEditShown,
+		}));
+	};
 
 	render() {
-		const { notes, pinnedNotes, isColorEditShown } = this.state;
+		const { notes, pinnedNotes, isColorEditShown, noteColored } =
+			this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
 
 		return (
@@ -103,8 +114,9 @@ export class KeepApp extends React.Component {
 					)} */}
 					{isColorEditShown && (
 						<ColorInput
-							notes={notes}
+							note={noteColored}
 							onCloseColorModal={this.onCloseColorModal}
+							onChooseColor={this.onChangeBackground}
 						/>
 					)}
 					<NoteList

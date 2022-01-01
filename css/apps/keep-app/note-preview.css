@@ -1,11 +1,11 @@
 .note-preview{
     width: 16rem;
     height: fit-content;
-    padding: 1rem 1rem 0.313rem;
     border-radius: 8px;
     margin: .5rem;
     text-align: center;
     border: 1px solid #e0e0e0;
+    padding-top: 1rem;
 }
 
 .note-preview:hover{
@@ -14,11 +14,7 @@
 
 .note-preview img {
     max-width: 13rem;
-}
-
-.note-preview input {
-    border: none;
-    margin-bottom: 1rem;
+    border-radius: 7px;
 }
 
 .note-preview button {
@@ -36,6 +32,10 @@
     color: transparent;
    -webkit-text-stroke-width: 1.2px;
    -webkit-text-stroke-color: rgb(27, 27, 27);
+}
+
+.fas.fa-thumbtack.active-thumb {
+    color:red;
 }
 
 .fas.fa-palette {

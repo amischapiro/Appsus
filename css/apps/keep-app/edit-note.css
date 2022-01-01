@@ -9,10 +9,23 @@
 .color-input {
 	position: fixed;
 	top: 20%;
+    background-color: rgb(19, 19, 18);
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.color-input button {
     background-color: #fff;
+    font-size: 1.6rem;
+    height: fit-content;
+    border-radius: 50%;
 }
 
 .color-value {
-    width: 16px;
-    height: 16px;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
 }

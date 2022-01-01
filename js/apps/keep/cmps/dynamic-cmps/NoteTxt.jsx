@@ -9,18 +9,17 @@ export function NoteTxt({ note, onDeleteNote, onPinHandle, onCloneNote, onOpenCo
 	function noteEmail(){
 		const note = {body:txt,subject: 'note', to:'me@gmail.com'}
 		emailService.sendEmail(note)
-
 	}
 
 	return (
-		<div style={{ backgroundColor: note.style.backgroundColor }}>
+		<div className="note-preview" style={{ backgroundColor: note.style.backgroundColor }}>
 			{/* <input type="text" value={txt} /> */}
 			<p>{txt}</p>
 			<div className="note-actions">
 				<button onClick={() => onPinHandle(note.id)}>
-					<i className="fas fa-thumbtack"></i>
+					<i className={`fas fa-thumbtack ${note.isPinned ? 'active-thumb' : ''}`}></i>
 				</button>
-				<button onClick={() => onOpenColorModal()}>
+				<button onClick={() => onOpenColorModal({id: note.id, pinned: note.isPinned})}>
 					<i className="fas fa-palette"></i>
 				</button>
 				<button onClick={noteEmail}>

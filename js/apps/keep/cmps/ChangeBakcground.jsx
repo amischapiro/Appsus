@@ -1,4 +1,5 @@
-export function ColorInput({ note, onCloseColorModal }) {
+export function ColorInput({ note, onCloseColorModal, onChooseColor }) {
+	// console.log(note);
 	const colors = [
 		'#fff',
 		'#f28b82',
@@ -19,13 +20,14 @@ export function ColorInput({ note, onCloseColorModal }) {
 				return (
 					<div
 						onClick={() =>
-							onCloseColorModal()
+							onChooseColor(note.id, note.pinned, color)
 						}
 						style={{ backgroundColor: color }}
 						key={color}
 						className="color-value"></div>
 				);
 			})}
+			<button onClick={() => onCloseColorModal()}>X</button>
 		</div>
 	);
 }

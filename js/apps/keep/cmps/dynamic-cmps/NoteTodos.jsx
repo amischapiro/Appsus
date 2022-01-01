@@ -1,13 +1,30 @@
-import { ColorInput } from "../ChangeBakcground.jsx";
+import { ColorInput } from '../ChangeBakcground.jsx';
+import { emailService } from '../../../mail/services/email.service.js';
 
-export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onOpenColorModal }) {
+export function NoteTodos({
+	note,
+	onDeleteNote,
+	onPinHandle,
+	onCloneNote,
+	onOpenColorModal,
+}) {
 	const {
 		info: { label, todos },
 	} = note;
 
+	function noteEmail() {
+		const mailingList = todos.map(todo => {return todo.txt});
+		const mailBody = mailingList.join(', ');
+		const note = {
+			body: mailBody,
+			subject: label,
+			to: 'me@gmail.com',
+		};
+		emailService.sendEmail(note);
+	}
 
 	return (
-		<div style={{ backgroundColor: note.style.backgroundColor }}>
+		<div className="note-preview" style={{ backgroundColor: note.style.backgroundColor }}>
 			<h3>{label}</h3>
 			<ul>
 				{todos.map((todo, idx) => {
@@ -16,12 +33,12 @@ export function NoteTodos({ note, onDeleteNote, onPinHandle, onCloneNote, onOpen
 			</ul>
 			<div className="note-actions">
 				<button onClick={() => onPinHandle(note.id)}>
-					<i className="fas fa-thumbtack"></i>
+					<i className={`fas fa-thumbtack ${note.isPinned ? 'active-thumb' : ''}`}></i>
 				</button>
-				<button onClick={() => onOpenColorModal()}>
+				<button onClick={() => onOpenColorModal({id: note.id, pinned: note.isPinned})}>
 					<i className="fas fa-palette"></i>
 				</button>
-				<button>
+				<button onClick={noteEmail}>
 					<i className="far fa-envelope"></i>
 				</button>
 				<button onClick={() => onDeleteNote(note.id, note.isPinned)}>
