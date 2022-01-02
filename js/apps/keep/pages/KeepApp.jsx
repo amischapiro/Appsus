@@ -88,7 +88,7 @@ export class KeepApp extends React.Component {
 		this.state.noteColored = note;
 		this.setState((prevState) => ({
 			...prevState,
-			isEditShown: !this.state.isEditShown,
+			isColorEditShown: !this.state.isColorEditShown,
 		}));
 	};
 
@@ -98,6 +98,10 @@ export class KeepApp extends React.Component {
 			isColorEditShown: !this.state.isColorEditShown,
 		}));
 	};
+
+	// handleEditChange = (ev) => {
+	// 	console.log(ev);
+	// }
 
 	render() {
 		const {
@@ -129,6 +133,7 @@ export class KeepApp extends React.Component {
 						<EditNote
 							note={noteEdited}
 							onCloseEditModal={this.onCloseEditModal}
+							handleEditChange={this.handleEditChange}
 						/>
 					)}
 					{isColorEditShown && (

@@ -8,7 +8,7 @@ export function EditNoteTxt({ note, onCloseEditModal }) {
 	} = note;
 
 	function handleChange(ev) {
-		noteService.editNote(note, ev.target.value);
+		noteService.editNote(note, ev.target.value)
 	}
 
 	return (

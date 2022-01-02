@@ -120,7 +120,7 @@ function _updateTxt(note, newTxt) {
     noteList[noteIdx].info.txt = newTxt;
     if (note.isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
-    return Promise.resolve();
+    return Promise.resolve(noteList[noteIdx]);
 }
 
 function _updateImg(note, newTxt) {
@@ -130,7 +130,7 @@ function _updateImg(note, newTxt) {
     noteList[noteIdx].info.title = newTxt;
     if (note.isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
-    return Promise.resolve();
+    return Promise.resolve(noteList[noteIdx]);
 }
 
 function _updateTodos(note, newTxt) {
@@ -142,7 +142,7 @@ function _updateTodos(note, newTxt) {
     noteList[noteIdx].info.todos = newTxt.map(todo => {return {txt: todo, doneAt: null}});
     if (note.isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
-    return Promise.resolve();
+    return Promise.resolve(noteList[noteIdx]);
 }
 
 function _getFilteredNotes(notes, filterBy) {
