@@ -2,8 +2,16 @@ const { NavLink, withRouter } = ReactRouterDOM;
 
 class _AppHeader extends React.Component {
 	state = {
-		currPage: 'Home'
-	}
+		currPage: 'Home',
+		isHamShown: false,
+	};
+
+	onToggleMenu = () => {
+		this.setState((prevState) => ({
+			...prevState,
+			isHamShown: !this.state.isHamShown,
+		}));
+	};
 	render() {
 		return (
 			<header className="app-header">
@@ -11,7 +19,7 @@ class _AppHeader extends React.Component {
 					<h1 onClick={() => this.props.history.push('/')}>
 						<img src="assets/img/logo.png" alt="" />
 					</h1>
-					<nav className="app-nav">
+					<nav className={`app-nav ${this.state.isHamShown ? 'menu-open' : ''}`}>
 						<ul className="clean-list flex">
 							<li>
 								<NavLink
@@ -56,6 +64,9 @@ class _AppHeader extends React.Component {
 							</li>
 						</ul>
 					</nav>
+					<button className="btn-menu" onClick={this.onToggleMenu}>
+						☰
+					</button>
 				</div>
 			</header>
 		);

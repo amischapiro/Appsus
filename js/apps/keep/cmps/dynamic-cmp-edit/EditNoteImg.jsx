@@ -13,12 +13,11 @@ export function EditNoteImg({ note, onCloseEditModal }) {
 
 	return (
 		<div className="note-editor">
-			<input
-				type="text"
+			<textarea
 				value={title}
-				// cols="50"
-				// rows="2"
-				onChange={handleChange}></input>
+				cols="50"
+				rows="2"
+				onChange={handleChange}></textarea>
 			<button onClick={() => onCloseEditModal()}>Done</button>
 		</div>
 	);

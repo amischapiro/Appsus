@@ -23,7 +23,7 @@
 }
 
 .app-nav li {
-    color: gray;
+	color: gray;
 }
 
 .app-nav li:not(:last-child) {
@@ -32,4 +32,60 @@
 
 .my-active {
 	color: rgb(27, 27, 27);
+}
+
+.btn-menu {
+	display: none;
+}
+
+@media screen and (max-width: 760px) {
+	/* HAMBURBER */
+	.btn-menu {
+		display: block;
+		margin-top: 1.3rem;
+		border: none;
+		background-color: inherit;
+		z-index: 2;
+		padding: 7px 10px;
+		height: fit-content;
+		width: fit-content;
+	}
+
+	.btn-menu:hover {
+		background-color: #dbdbdb;
+	}
+
+	.app-nav ul {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		padding: 27.3% 1rem;
+		font-weight: 500;
+		font-size: 1.5rem;
+		line-height: 1.75rem;
+		position: fixed;
+		top: 0;
+		right: 0;
+		flex-direction: column;
+		height: 100vh;
+		border-inline-start: 1px solid #dbdbdb;
+		width: 50%;
+		transform: translateX(100%);
+		transition: transform 0.6s, box-shadow 0.6s;
+		z-index: 1;
+		background-color: #fff;
+	}
+
+	.app-nav li:not(:last-child) {
+		margin-inline-end: 0;
+	}
+
+	.app-nav.menu-open ul {
+		box-shadow: 0px 0px 30px rgb(0 0 0 / 30%);
+		transform: translateX(0);
+	}
+
+	.app-nav li {
+		border-bottom: #ffffff;
+	}
 }
