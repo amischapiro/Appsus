@@ -14,6 +14,7 @@ export class KeepApp extends React.Component {
 		filterBy: null,
 		pinnedNotes: null,
 		isEditShown: false,
+		noteEdited: null,
 		isColorEditShown: false,
 		noteColored: null,
 	};
@@ -68,18 +69,26 @@ export class KeepApp extends React.Component {
 		}));
 	};
 
-	// onToggleEditModal = () => {
-	// 	this.setState((prevState) => ({
-	// 		...prevState,
-	// 		isEditShown: !this.state.isEditShown,
-	// 	}));
-	// };
+	onOpenEditModal = (note) => {
+		this.state.noteEdited = note;
+		this.setState((prevState) => ({
+			...prevState,
+			isEditShown: !this.state.isEditShown,
+		}));
+	};
+
+	onCloseEditModal = () => {
+		this.setState((prevState) => ({
+			...prevState,
+			isEditShown: !this.state.isEditShown,
+		}));
+	};
+
 	onOpenColorModal = (note) => {
-		console.log(note);
 		this.state.noteColored = note;
 		this.setState((prevState) => ({
 			...prevState,
-			isColorEditShown: !this.state.isColorEditShown,
+			isEditShown: !this.state.isEditShown,
 		}));
 	};
 
@@ -91,8 +100,14 @@ export class KeepApp extends React.Component {
 	};
 
 	render() {
-		const { notes, pinnedNotes, isColorEditShown, noteColored } =
-			this.state;
+		const {
+			notes,
+			pinnedNotes,
+			isColorEditShown,
+			noteColored,
+			noteEdited,
+			isEditShown,
+		} = this.state;
 		if (!notes || !pinnedNotes) return <Loader />;
 
 		return (
@@ -108,10 +123,14 @@ export class KeepApp extends React.Component {
 						onPinHandle={this.onUnpinNote}
 						onCloneNote={this.onCloneNote}
 						onOpenColorModal={this.onOpenColorModal}
+						onOpenEditModal={this.onOpenEditModal}
 					/>
-					{/* {isEditShown && (
-						<EditNote onToggleEditModal={this.onToggleEditModal} />
-					)} */}
+					{isEditShown && (
+						<EditNote
+							note={noteEdited}
+							onCloseEditModal={this.onCloseEditModal}
+						/>
+					)}
 					{isColorEditShown && (
 						<ColorInput
 							note={noteColored}
@@ -125,6 +144,7 @@ export class KeepApp extends React.Component {
 						onPinHandle={this.onPinNote}
 						onCloneNote={this.onCloneNote}
 						onOpenColorModal={this.onOpenColorModal}
+						onOpenEditModal={this.onOpenEditModal}
 					/>
 				</div>
 			</section>

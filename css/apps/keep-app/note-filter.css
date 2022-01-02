@@ -6,7 +6,8 @@
 .filter-notes button {
 	background: none;
 	text-align: left;
-	height: 2rem;
+	height: 3rem;
+	width: 17.5rem; 
 	padding: 0.313rem;
 	padding-inline-start: 16px;
 	margin: 0;
@@ -26,6 +27,7 @@
 }
 
 .filter-notes input {
+	width: 15rem;
     margin-inline-start: .5rem;
     border: 1px solid #e0e0e0;
     border-radius: 7px;

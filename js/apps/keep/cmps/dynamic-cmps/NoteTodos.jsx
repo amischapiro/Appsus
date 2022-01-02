@@ -7,6 +7,7 @@ export function NoteTodos({
 	onPinHandle,
 	onCloneNote,
 	onOpenColorModal,
+	onOpenEditModal
 }) {
 	const {
 		info: { label, todos },
@@ -40,6 +41,9 @@ export function NoteTodos({
 				</button>
 				<button onClick={noteEmail}>
 					<i className="far fa-envelope"></i>
+				</button>
+				<button onClick={() => onOpenEditModal(note)}>
+					<i className="far fa-edit"></i>
 				</button>
 				<button onClick={() => onDeleteNote(note.id, note.isPinned)}>
 					<i className="far fa-trash-alt"></i>

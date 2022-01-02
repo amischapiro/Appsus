@@ -1,15 +1,30 @@
-import { EditNoteTxt } from "./EditNoteTxt.jsx";
-import { EditNoteTodos } from "./EditNoteTodos.jsx";
-import { EditNoteImg } from "./EditNoteImg.jsx";
+import { EditNoteTxt } from './EditNoteTxt.jsx';
+import { EditNoteTodos } from './EditNoteTodos.jsx';
+import { EditNoteImg } from './EditNoteImg.jsx';
 
-export function DynamicCmpEdit({ note, onEditNote }) {
+export function DynamicCmpEdit({ note, onCloseEditModal }) {
 	switch (note.type) {
 		case 'note-img':
-			return <EditNoteImg note={note} onEditNote={onEditNote} />;
+			return (
+				<EditNoteImg
+					note={note}
+					onCloseEditModal={onCloseEditModal}
+				/>
+			);
 		case 'note-todos':
-			return <EditNoteTodos note={note} onEditNote={onEditNote} />;
+			return (
+				<EditNoteTodos
+					note={note}
+					onCloseEditModal={onCloseEditModal}
+				/>
+			);
 		case 'note-txt':
-			return <EditNoteTxt note={note} onEditNote={onEditNote} />;
+			return (
+				<EditNoteTxt
+					note={note}
+					onCloseEditModal={onCloseEditModal}
+				/>
+			);
 		// case 'note-vid':
 		//     return <NoteVid {...props.note} />
 		default:

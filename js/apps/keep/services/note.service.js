@@ -10,7 +10,8 @@ export const noteService = {
     removePinnedNote,
     queryPinned,
     cloneNote,
-    changeNoteBgc
+    changeNoteBgc,
+    editNote
 }
 
 const NOTE_KEY = 'noteDB';
@@ -91,6 +92,55 @@ function changeNoteBgc(noteId, isPinned, bgc) {
     const noteIdx = noteList.findIndex(note => note.id === noteId);
     noteList[noteIdx].style.backgroundColor = bgc;
     if (isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    else _saveNotesToStorage(noteList);
+    return Promise.resolve();
+}
+
+function editNote(note, newTxt) {
+    switch (note.type) {
+        case 'note-txt':
+            _updateTxt(note, newTxt);
+            break;
+        case 'note-img':
+            _updateImg(note, newTxt);
+            break;
+        case 'note-todos':
+            _updateTodos(note, newTxt);
+            break;
+        default:
+            return;
+    }
+
+}
+
+function _updateTxt(note, newTxt) {
+    const noteId = note.id;
+    let noteList = note.isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
+    const noteIdx = noteList.findIndex(note => note.id === noteId);
+    noteList[noteIdx].info.txt = newTxt;
+    if (note.isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    else _saveNotesToStorage(noteList);
+    return Promise.resolve();
+}
+
+function _updateImg(note, newTxt) {
+    const noteId = note.id;
+    let noteList = note.isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
+    const noteIdx = noteList.findIndex(note => note.id === noteId);
+    noteList[noteIdx].info.title = newTxt;
+    if (note.isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
+    else _saveNotesToStorage(noteList);
+    return Promise.resolve();
+}
+
+function _updateTodos(note, newTxt) {
+    const noteId = note.id;
+    let noteList = note.isPinned ? _loadNotesFromStorage(PINNED_KEY) : _loadNotesFromStorage();
+    const noteIdx = noteList.findIndex(note => note.id === noteId);
+    newTxt.split(',');
+    noteList[noteIdx].info.label = newTxt.splice(0, 1);
+    noteList[noteIdx].info.todos = newTxt.map(todo => {return {txt: todo, doneAt: null}});
+    if (note.isPinned) _saveNotesToStorage(noteList, PINNED_KEY);
     else _saveNotesToStorage(noteList);
     return Promise.resolve();
 }
@@ -199,7 +249,7 @@ function _getNotes() {
                 txt: "Fullstack Me Baby!"
             },
             style: {
-                backgroundColor: "#fff"
+                backgroundColor: "#e8eaed"
             }
         },
         {
@@ -207,18 +257,7 @@ function _getNotes() {
             type: "note-txt",
             isPinned: false,
             info: {
-                txt: "another note attempt"
-            },
-            style: {
-                backgroundColor: "#fff"
-            }
-        },
-        {
-            id: utilService.makeId(),
-            type: "note-txt",
-            isPinned: false,
-            info: {
-                txt: "Note test test test tes"
+                txt: "git bash > cmd"
             },
             style: {
                 backgroundColor: "#fff"
@@ -229,11 +268,58 @@ function _getNotes() {
             type: "note-img",
             isPinned: false,
             info: {
+                url: "assets/img/sprint1.jpg",
+                title: "Sprint 1"
+            },
+            style: {
+                backgroundColor: "#f28b82"
+            }
+        },
+        {
+            id: utilService.makeId(),
+            type: "note-txt",
+            isPinned: false,
+            info: {
+                txt: "Mic check 1 2"
+            },
+            style: {
+                backgroundColor: "#fff475"
+            }
+        },
+        {
+            id: utilService.makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                url: "assets/img/sprint2.jpg",
+                title: "Sprint 2"
+            },
+            style: {
+                backgroundColor: "#fdcfe8"
+            }
+        },
+        {
+            id: utilService.makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
                 url: "assets/img/fox.jpg",
-                title: "Bobi and I"
+                title: "Sprint 3"
             },
             style: {
                 backgroundColor: "#fff"
+            }
+        },
+        {
+            id: utilService.makeId(),
+            type: "note-img",
+            isPinned: false,
+            info: {
+                url: "assets/img/sprint4.png",
+                title: "Sprint 4?"
+            },
+            style: {
+                backgroundColor: "#d7aefb"
             }
         },
         // {
@@ -253,10 +339,11 @@ function _getNotes() {
             type: "note-todos",
             isPinned: false,
             info: {
-                label: "Get my stuff together",
+                label: "Extremely Urgent",
                 todos: [
-                    { txt: "Driving liscence", doneAt: null },
-                    { txt: "Coding power", doneAt: 187111111 }
+                    { txt: "Peanut butter Cheetos", doneAt: null },
+                    { txt: "Are better than", doneAt: 187111111 },
+                    { txt: "Regular Cheetos", doneAt: null },
                 ]
             },
             style: {
@@ -275,10 +362,21 @@ function _getPinnedNotes() {
             type: "note-txt",
             isPinned: true,
             info: {
-                txt: "Important note"
+                txt: "Important note, urgent, super dangerous, no seriously..."
             },
             style: {
                 backgroundColor: "#fff"
+            }
+        },
+        {
+            id: utilService.makeId(),
+            type: "note-txt",
+            isPinned: true,
+            info: {
+                txt: "Okay this one really is serious"
+            },
+            style: {
+                backgroundColor: "#d7aefb"
             }
         },
     ];

@@ -28,3 +28,8 @@
     break-inside: avoid-column;
     page-break-inside: avoid;
 }
+
+.pinned-note-list {
+    width: 100%;
+    text-align: center;
+}

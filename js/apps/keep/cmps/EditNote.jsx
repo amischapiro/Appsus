@@ -1,7 +1,10 @@
-import { DynamicCmpEdit } from "./dynamic-cmp-edit/DynamicCmpEdit.jsx";
+import { DynamicCmpEdit } from './dynamic-cmp-edit/DynamicCmpEdit.jsx';
 
-export function EditNote({ note, onEditNote }) {
+export function EditNote({ note, onCloseEditModal }) {
 	return (
-		<DynamicCmpEdit note={ note} onEditNote={onEditNote} />
+		<DynamicCmpEdit
+			note={note}
+			onCloseEditModal={onCloseEditModal}
+		/>
 	);
 }

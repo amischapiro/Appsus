@@ -1,11 +1,11 @@
 import { NotePreview } from './NotePreview.jsx';
 
-export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onOpenColorModal }) {
+export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, onOpenColorModal, onOpenEditModal }) {
 	if (!notes.length) return <React.Fragment></React.Fragment>;
 	return (
-		<section>
+		<section className="pinned-note-list">
 			<h3>PINNED</h3>
-			<div className="notes-list flex wrap">
+			<div className="notes-list">
 				{notes.map((note) => (
 					<NotePreview
 						key={note.id}
@@ -14,6 +14,7 @@ export function PinnedNoteList({ notes, onDeleteNote, onPinHandle, onCloneNote, 
 						onPinHandle={onPinHandle}
 						onCloneNote={onCloneNote}
                         onOpenColorModal={onOpenColorModal}
+						onOpenEditModal={onOpenEditModal}
 					/>
 				))}
 			</div>

@@ -6,6 +6,7 @@ export function NotePreview({
 	onPinHandle,
 	onCloneNote,
 	onOpenColorModal,
+	onOpenEditModal
 }) {
 	return (
 		<DynamicCmp
@@ -15,6 +16,7 @@ export function NotePreview({
 			onPinHandle={onPinHandle}
 			onCloneNote={onCloneNote}
 			onOpenColorModal={onOpenColorModal}
+			onOpenEditModal={onOpenEditModal}
 		/>
 	);
 }

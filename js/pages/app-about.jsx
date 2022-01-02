@@ -7,8 +7,8 @@ export function AppAbout(){
         <h1>A little about us:</h1>
         <h3>Founders</h3>
         <p className="names">Yarden Levy</p>
-        <p className="names-p">Senior Full-Stack developer, working in the field for almost 20 years
-            , Founded company's like Facebook,wixx and Instagram
+        <p className="names-p">Senior Full-Stack developer, working in the field for almost 20 years.
+            Founded companies like Facebook, Wixx and Instagram
         </p>
         <p className="names">Amitai Schapiro</p>
         <p className="names-p">Part time Full-Stack developer, batman the rest of time, that's all you need to know...</p>
