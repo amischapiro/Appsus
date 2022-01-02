@@ -379,6 +379,24 @@ function _getPinnedNotes() {
                 backgroundColor: "#d7aefb"
             }
         },
+        {
+            id: utilService.makeId(),
+            type: "note-todos",
+            isPinned: false,
+            info: {
+                label: "Shopping list",
+                todos: [
+                    { txt: "Bread", doneAt: null },
+                    { txt: "Milk", doneAt: 187111111 },
+                    { txt: "Jam", doneAt: null },
+                    { txt: "Day 1 L.E 1996 Tamagotchi", doneAt: null },
+                    { txt: "Cornflakes", doneAt: null },
+                ]
+            },
+            style: {
+                backgroundColor: "#d7aefb"
+            }
+        }
     ];
 
     return pinnedNotes;

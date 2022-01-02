@@ -37,6 +37,10 @@
     background-color: #ddddddbc;
 }
 
+.note-preview li {
+    text-align: start;
+}
+
 .fas.fa-thumbtack {
     color: transparent;
    -webkit-text-stroke-width: 1.2px;
