@@ -382,7 +382,7 @@ function _getPinnedNotes() {
         {
             id: utilService.makeId(),
             type: "note-todos",
-            isPinned: false,
+            isPinned: true,
             info: {
                 label: "Shopping list",
                 todos: [
